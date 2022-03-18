@@ -1,4 +1,4 @@
-package bootstrap;
+/*package bootstrap;
 
 
 
@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import org.apache.logging.log4j.Logger;
-import org.hibernate.annotations.common.util.impl.Log_.logger;
+
 import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -49,4 +49,4 @@ public class BootStrapData implements CommandLineRunner{
 		System.out.print("Number of elements: "+bR.count());
 	}
 
-}
+}*/
