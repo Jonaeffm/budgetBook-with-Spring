@@ -17,6 +17,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import domain.Budget;
 import repositories.budgetRepository;
 
+@EnableAutoConfiguration
 @EnableJpaRepositories("repositories") 
 @SpringBootApplication
 @ComponentScan("bootstrap")
