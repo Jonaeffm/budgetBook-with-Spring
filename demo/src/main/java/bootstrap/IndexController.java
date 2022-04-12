@@ -28,7 +28,6 @@ public class IndexController {
 	}*/
 	
 	 @Autowired
-	 @Qualifier("BudgetService")
 	 private IBudgetService BudgetService;
 	
 	@GetMapping(value = "/")

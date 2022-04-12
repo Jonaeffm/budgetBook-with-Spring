@@ -20,7 +20,7 @@ import repositories.budgetRepository;
 @EnableAutoConfiguration
 @EnableJpaRepositories("repositories") 
 @SpringBootApplication
-@ComponentScan("bootstrap")
+@ComponentScan({"bootstrap","service"})
 @EntityScan("domain")
 public class DemoApplication /*implements CommandLineRunner*/{
 
