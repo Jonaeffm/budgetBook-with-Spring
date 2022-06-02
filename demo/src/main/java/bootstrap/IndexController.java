@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,9 +18,7 @@ import service.BudgetService;
 import service.IBudgetService;
 
 
-@Controller
-@EnableAutoConfiguration
-@RequestMapping("/")
+@RestController
 public class IndexController {
 
 	/*IndexController(IBudgetService BudgetService){
@@ -30,14 +29,16 @@ public class IndexController {
 	 @Autowired
 	 private IBudgetService BudgetService;
 	
-	@GetMapping(value = "/")
+	@GetMapping("/test/")
 	public String Index()
 	{
+		System.out.println("TEST");
 		return "index";
 		
 	}
 	
 	@GetMapping(value="/budgets")
+	@ResponseBody
 	public ModelAndView getBudget() {
 
         var Budgets = (List<Budget>) BudgetService.findAll();
