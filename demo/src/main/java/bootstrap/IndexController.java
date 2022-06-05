@@ -1,5 +1,8 @@
 package bootstrap;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 
@@ -7,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,7 +24,7 @@ import service.BudgetService;
 import service.IBudgetService;
 
 
-@RestController
+@Controller
 public class IndexController {
 
 	/*IndexController(IBudgetService BudgetService){
@@ -28,16 +34,23 @@ public class IndexController {
 	
 	 @Autowired
 	 private IBudgetService BudgetService;
-	
-	@GetMapping("/test/")
-	public String Index()
+	/*
+	@RequestMapping(method = RequestMethod.GET, value ="/test/")
+	public ModelAndView Index() throws IOException
 	{
-		System.out.println("TEST");
-		return "index";
+		/*System.out.println("TEST");
+		return "index.html";*/
+		/*ModelAndView modelAndView = new ModelAndView();
+	    modelAndView.setViewName("index.html");
+	    return modelAndView;*/
+	/*
+		    ModelAndView modelAndView = new ModelAndView();
+		    modelAndView.setViewName("index.html");
+		    return modelAndView;
 		
-	}
-	
-	@GetMapping(value="/budgets")
+	}*/
+	/*
+	@GetMapping("/budgets")
 	@ResponseBody
 	public ModelAndView getBudget() {
 
@@ -47,7 +60,28 @@ public class IndexController {
         params.put("budgets", Budgets);
 
         return new ModelAndView("showBudgets", params);
-    }
+    }*/
+/*
+
+	    @RequestMapping(method = RequestMethod.GET, value = "/test2/")
+	    public ModelAndView welcome() {
+	        ModelAndView modelAndView = new ModelAndView();
+	        modelAndView.setViewName("index.html");
+	        return modelAndView;
+	    }
+	*/
+	 
+	   @GetMapping(value = "/show")
+	    public ModelAndView show() {
+
+	        var mav = new ModelAndView();
+
+	       
+	        mav.setViewName("index");
+
+	        return mav;
+	    }
+	
 }
 
 /*

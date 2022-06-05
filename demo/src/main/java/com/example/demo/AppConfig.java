@@ -8,9 +8,9 @@ import repositories.budgetRepository;
 @Configuration
 public class AppConfig {
 
-    @Bean
-    public budgetRepository bR() {
-        return new budgetRepository();
-    }
+    //@Bean
+   // public budgetRepository bR() {
+       // return new budgetRepository();
+    //}
 
 }
