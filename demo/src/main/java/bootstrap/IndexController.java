@@ -50,9 +50,9 @@ public class IndexController {
 		
 	}*/
 	
-	@GetMapping("/budgets")
+	/*@GetMapping("/budgets")
 	@ResponseBody
-	public ModelAndView getBudget() {
+	public ModelAndView getBudget(Model model) {
 
         var Budgets = (List<Budget>) BudgetService.findAll();
 
@@ -60,7 +60,15 @@ public class IndexController {
         params.put("budgets", Budgets);
 
         return new ModelAndView("showBudgets", params);
-    }
+		//model.addAttribute( attributeName: "budgets",BudgetService.findAll());
+    }*/
+	 
+	 @GetMapping("/budgets")
+	 public String getBudgets(Model model)
+	 {
+		 model.addAttribute("budgets",BudgetService.findAll());
+		 return "showBudgets";
+	 }
 /*
 
 	    @RequestMapping(method = RequestMethod.GET, value = "/test2/")
