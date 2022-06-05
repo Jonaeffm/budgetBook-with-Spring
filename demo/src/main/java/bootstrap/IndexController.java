@@ -49,7 +49,7 @@ public class IndexController {
 		    return modelAndView;
 		
 	}*/
-	/*
+	
 	@GetMapping("/budgets")
 	@ResponseBody
 	public ModelAndView getBudget() {
@@ -60,7 +60,7 @@ public class IndexController {
         params.put("budgets", Budgets);
 
         return new ModelAndView("showBudgets", params);
-    }*/
+    }
 /*
 
 	    @RequestMapping(method = RequestMethod.GET, value = "/test2/")
