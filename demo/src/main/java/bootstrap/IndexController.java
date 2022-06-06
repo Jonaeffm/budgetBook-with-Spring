@@ -71,7 +71,12 @@ public class IndexController {
 		 return "showBudgets";
 	 }
 
-
+	  @RequestMapping(value="/addBudget", method=RequestMethod.GET)
+	    public String showStudentInfo(Model model) {
+	        model.addAttribute("budgets", new Budget());
+	        return "insert";
+	    }
+	 
 	 @RequestMapping(value="/addBudget", method=RequestMethod.POST) 
         public String processStudentInfo(@ModelAttribute("budgets") Budget 
         		budgetToAdd){ 
