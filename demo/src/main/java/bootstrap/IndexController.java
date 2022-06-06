@@ -73,10 +73,10 @@ public class IndexController {
 
 
 	 @RequestMapping(value="/addBudget", method=RequestMethod.POST) 
-        public String processStudentInfo(@ModelAttribute("budgets") String 
+        public String processStudentInfo(@ModelAttribute("budgets") Budget 
         		budgetToAdd){ 
             BudgetService.addBudget(budgetToAdd);
-            return "views/success"; 
+            return "insert"; 
         }
 
         /*    @RequestMapping(method = RequestMethod.GET, value = "/test2/")
