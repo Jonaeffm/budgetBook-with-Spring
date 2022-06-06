@@ -7,6 +7,7 @@ import domain.Budget;
 public interface IBudgetService {
 
 	List<Budget> findAll();
+	void addBudget(Budget b);
 }
 /*package com.zetcode.service;
 

@@ -18,6 +18,10 @@ public class BudgetService implements IBudgetService{
 	public List<Budget> findAll(){
 		return (List<Budget>) repository.findAll();
 	}
+	
+	public void addBudget(Budget b) {
+        repository.save(b);
+    }
 }
 /*
 
