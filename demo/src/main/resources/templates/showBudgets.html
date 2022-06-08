@@ -20,8 +20,10 @@
                 <th>Date</th>
             </tr>
 
+
+
             <#list countries as country>
-                <tr th:each="budget : ${budgets}">
+                <tr th:each="budget, stat : ${#lists.sort(budgets, byDate)}">
                     <td th:text = "${budget.id}"></td>
                     <td th:text = "${budget.product}"></td>
                     <td th:text = "${budget.price}"></td>

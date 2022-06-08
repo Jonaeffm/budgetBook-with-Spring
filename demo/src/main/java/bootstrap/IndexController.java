@@ -3,6 +3,7 @@ package bootstrap;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -74,6 +75,7 @@ public class IndexController {
 	  @RequestMapping(value="/addBudget", method=RequestMethod.GET)
 	    public String showStudentInfo(Model model) {
 	        model.addAttribute("budgets", new Budget());
+	        model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
 	        return "insert";
 	    }
 	 
