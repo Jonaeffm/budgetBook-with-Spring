@@ -1,6 +1,9 @@
 package domain;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Comparator;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,7 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Budget {
+public class Budget implements Comparator<Budget> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -33,6 +36,8 @@ public class Budget {
 	public Date getDate() {
 		return date;
 	}
+	
+
 
 	public void setDate(Date date) {
 		this.date = date;
@@ -84,5 +89,17 @@ public class Budget {
 	public String toString()
 	{
 		return "date: "+date+" product: +"+product+" price: "+price;
+	}
+
+
+public int compareTo(Budget b1, Budget b2) {
+		// TODO Auto-generated method stub
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+		 String v1 = dateFormat.format(b1.getDate());
+         String v2 =dateFormat.format(b2.getDate());
+
+         if ((v1.compareTo(v2)) >0) return 1;
+         else return 0;
 	}
 }
