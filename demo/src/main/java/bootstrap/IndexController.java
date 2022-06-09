@@ -75,7 +75,7 @@ public class IndexController {
 	  @RequestMapping(value="/addBudget", method=RequestMethod.GET)
 	    public String showStudentInfo(Model model) {
 	        model.addAttribute("budgets", new Budget());
-	        model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+	        //model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
 	        return "insert";
 	    }
 	 

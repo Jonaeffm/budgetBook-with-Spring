@@ -10,11 +10,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+
 @Entity
-public class Budget implements Comparator<Budget> {
+public class Budget {//implements Comparable<Budget> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+ private long id;
 	private Date date;
 	private String product;
 	private Double price;
@@ -90,9 +91,9 @@ public class Budget implements Comparator<Budget> {
 	{
 		return "date: "+date+" product: +"+product+" price: "+price;
 	}
-
-
-public int compareTo(Budget b1, Budget b2) {
+/*
+@Override
+public int compare(Budget b1, Budget b2) {
 		// TODO Auto-generated method stub
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
@@ -102,4 +103,12 @@ public int compareTo(Budget b1, Budget b2) {
          if ((v1.compareTo(v2)) >0) return 1;
          else return 0;
 	}
+*/
+
+/*
+@Override
+public int compareTo(Budget o) {
+	// TODO Auto-generated method stub
+	return 0;
+}*/
 }
