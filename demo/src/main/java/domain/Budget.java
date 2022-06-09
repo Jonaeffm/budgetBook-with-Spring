@@ -12,7 +12,7 @@ import jakarta.persistence.Id;
 
 
 @Entity
-public class Budget implements Comparable<Budget> {
+public class Budget {//implements Comparable<Budget> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
  private long id;
@@ -105,7 +105,7 @@ public int compare(Budget b1, Budget b2) {
 	}
 */
 
-
+/*
 @Override
 public int compareTo(Budget o) {
 	// TODO Auto-generated method stub
@@ -115,5 +115,5 @@ public int compareTo(Budget o) {
 
     if ((v1.compareTo(v2)) >0) return 1;
     else return 0;
-}
+}*/
 }

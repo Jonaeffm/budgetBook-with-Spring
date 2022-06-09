@@ -69,6 +69,7 @@ public class IndexController {
 	 public String getBudgets(Model model)
 	 {
 		 model.addAttribute("budgets",BudgetService.findAll());
+		model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
 		 return "showBudgets";
 	 }
 
