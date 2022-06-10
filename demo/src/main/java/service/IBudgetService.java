@@ -1,5 +1,6 @@
 package service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,7 +12,7 @@ public interface IBudgetService {
 	void addBudget(Budget b);
 	
 	public void deleteById(long ID);
-
+	public List<Budget> findByDate(Date d);
 }
 /*package com.zetcode.service;
 

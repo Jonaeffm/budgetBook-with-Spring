@@ -1,6 +1,9 @@
 package bootstrap;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
@@ -115,6 +118,37 @@ public class IndexController {
 	        return mav;
 	    }
 	
+	   
+
+		 @GetMapping("/budgetsTest")
+		 public String getBudgetsTest(Model model)
+		 {
+			 String strDate = "2009-12-31 00:00:00";
+			 
+			 /*
+			 * To convert String to java.sql.Date, use
+			 * Date (long date) constructor.
+			 * 
+			 * It creates java.sql.Date object from the milliseconds provided.
+			 */
+			 
+			 //first convert string to java.util.Date object using SimpleDateFormat
+			 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+			 java.util.Date date;
+			try {
+				date = sdf.parse(strDate);
+				java.sql.Date sqlDate = new Date(date.getDate());
+				 Date d =sqlDate;
+				 model.addAttribute("budgets",BudgetService.findByDate(d));
+				model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 
+			 
+			 return "showBudgets";
+		 }
 }
 
 /*

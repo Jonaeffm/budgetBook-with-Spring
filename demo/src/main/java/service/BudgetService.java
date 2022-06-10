@@ -1,5 +1,6 @@
 package service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +21,15 @@ public class BudgetService implements IBudgetService{
 		return (List<Budget>) repository.findAll();
 	}
 	
+	public List<Budget> findByDate(Date d){
+		List<Budget> temp = (List<Budget>) repository.findAll();
+		for(int i=0;i<temp.size();i++)
+		{
+			if(temp.get(i).getDate()!= d)
+				temp.remove(i);
+		}
+		return temp;
+	}
 	
 	public void deleteById(long ID){
 		 repository.deleteById(ID);
@@ -28,6 +38,8 @@ public class BudgetService implements IBudgetService{
 	public void addBudget(Budget b) {
         repository.save(b);
 	}
+
+	
 }	
 	
 	
