@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Budget;
+import repositories.budgetRepository;
 import service.BudgetService;
 import service.IBudgetService;
 
@@ -36,6 +38,7 @@ public class IndexController {
 	
 	 @Autowired
 	 private IBudgetService BudgetService;
+	 private budgetRepository BudgetRepo;
 	/*
 	@RequestMapping(method = RequestMethod.GET, value ="/test/")
 	public ModelAndView Index() throws IOException
@@ -86,6 +89,13 @@ public class IndexController {
             BudgetService.addBudget(budgetToAdd);
             return "insert"; 
         }
+	 
+	 @GetMapping("/delete/{id}")
+	 public String deleteBudget(@PathVariable("id") long id, Model model) {
+	     Budget budget = BudgetRepo.findById(id)
+	       .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+	     BudgetRepo.delete(budget);
+	     return "redirect:/budgets"};
 
         /*    @RequestMapping(method = RequestMethod.GET, value = "/test2/")
 	    public ModelAndView welcome() {
