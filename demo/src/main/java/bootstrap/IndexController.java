@@ -42,6 +42,7 @@ public class IndexController {
 	 @Autowired
 	 private IBudgetService BudgetService;
 	 
+	
 	/*
 	@RequestMapping(method = RequestMethod.GET, value ="/test/")
 	public ModelAndView Index() throws IOException
@@ -104,9 +105,19 @@ public class IndexController {
      public String selectDate(Model model,@ModelAttribute("budgets") Budget 
      		budgetToAdd){
 		
-		 getBudgetsTest(model, budgetToAdd.getDate());
+		 
+		// BudgetService.addBudget(budgetToAdd);
+          
+		 model.addAttribute("budgets",BudgetService.findByDate(budgetToAdd.getDate()));
+			model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+		
+		 
+		 
+		 return "showBudgets";
+		 
+		// getBudgetsTest(model, budgetToAdd.getDate());
         
-         return "showBudgets"; 
+        
      }
 	 
 	 
