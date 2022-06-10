@@ -93,6 +93,23 @@ public class IndexController {
             return "insert"; 
         }
 	 
+	 @RequestMapping(value="/selectDate", method=RequestMethod.GET)
+	    public String selectDate(Model model) {
+	        model.addAttribute("budgets", new Budget());
+	        //model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+	        return "insert";
+	    }
+	 
+	 @RequestMapping(value="/selectDate", method=RequestMethod.POST) 
+     public String selectDate(Model model,@ModelAttribute("budgets") Budget 
+     		budgetToAdd){
+		
+		 getBudgetsTest(model, budgetToAdd.getDate());
+        
+         return "showBudgets"; 
+     }
+	 
+	 
 	 @GetMapping("/delete/{id}")
 	 public String deleteBudget(@PathVariable("id") long id, Model model) {
 	     
@@ -121,30 +138,12 @@ public class IndexController {
 	   
 
 		 @GetMapping("/budgetsTest")
-		 public String getBudgetsTest(Model model)
+		 public String getBudgetsTest(Model model,Date d)
 		 {
-			 String strDate = "2009-12-31 00:00:00";
-			 
-			 /*
-			 * To convert String to java.sql.Date, use
-			 * Date (long date) constructor.
-			 * 
-			 * It creates java.sql.Date object from the milliseconds provided.
-			 */
-			 
-			 //first convert string to java.util.Date object using SimpleDateFormat
-			 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-			 java.util.Date date;
-			try {
-				date = sdf.parse(strDate);
-				java.sql.Date sqlDate = new Date(date.getDate());
-				 Date d =sqlDate;
+			
 				 model.addAttribute("budgets",BudgetService.findByDate(d));
 				model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
 			 
 			 
 			 return "showBudgets";
