@@ -38,7 +38,7 @@ public class IndexController {
 	
 	 @Autowired
 	 private IBudgetService BudgetService;
-	 private budgetRepository BudgetRepo;
+	 
 	/*
 	@RequestMapping(method = RequestMethod.GET, value ="/test/")
 	public ModelAndView Index() throws IOException
@@ -92,10 +92,9 @@ public class IndexController {
 	 
 	 @GetMapping("/delete/{id}")
 	 public String deleteBudget(@PathVariable("id") long id, Model model) {
-	     Budget budget = BudgetRepo.findById(id)
-	       .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-	     BudgetRepo.delete(budget);
-	     return "redirect:/budgets"};
+	     
+	     BudgetService.deleteById(id);
+	     return "redirect:/budgets";}
 
         /*    @RequestMapping(method = RequestMethod.GET, value = "/test2/")
 	    public ModelAndView welcome() {

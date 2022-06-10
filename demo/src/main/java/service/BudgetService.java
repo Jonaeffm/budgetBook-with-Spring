@@ -1,6 +1,7 @@
 package service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,10 +20,17 @@ public class BudgetService implements IBudgetService{
 		return (List<Budget>) repository.findAll();
 	}
 	
+	
+	public void deleteById(long ID){
+		 repository.deleteById(ID);
+	}
+	
 	public void addBudget(Budget b) {
         repository.save(b);
-    }
-}
+	}
+}	
+	
+	
 /*
 
 @Service

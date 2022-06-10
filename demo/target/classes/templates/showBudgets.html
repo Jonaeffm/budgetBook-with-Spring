@@ -18,6 +18,7 @@
                 <th>Product</th>
                 <th>Price</th>
                 <th>Date</th>
+                <th>Delete</th>
             </tr>
 
 
@@ -28,6 +29,7 @@
                     <td th:text = "${budget.product}"></td>
                     <td th:text = "${budget.price}"></td>
                     <td th:text = "${budget.date}"></td>
+                    <td><a th:href="@{/delete/{id}(id=${budget.id})}">Delete</a></td>
                 </tr>
             </#list>
         </table>
