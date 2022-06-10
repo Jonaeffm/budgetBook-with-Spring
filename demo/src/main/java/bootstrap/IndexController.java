@@ -90,14 +90,14 @@ public class IndexController {
         public String processStudentInfo(@ModelAttribute("budgets") Budget 
         		budgetToAdd){ 
             BudgetService.addBudget(budgetToAdd);
-            return "insert"; 
+            return "success"; 
         }
 	 
 	 @RequestMapping(value="/selectDate", method=RequestMethod.GET)
 	    public String selectDate(Model model) {
 	        model.addAttribute("budgets", new Budget());
 	        //model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
-	        return "insert";
+	        return "selectDate";
 	    }
 	 
 	 @RequestMapping(value="/selectDate", method=RequestMethod.POST) 
