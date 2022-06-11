@@ -25,8 +25,8 @@ public class BudgetService implements IBudgetService{
 		List<Budget> temp = (List<Budget>) repository.findAll();
 		for(int i=0;i<temp.size();i++)
 		{
-			if(temp.get(i).getDate()!= d)
-				temp.remove(i);
+			if(temp.get(i).getDate().compareTo(d) != 0)
+							temp.remove(i);
 		}
 		return temp;
 	}
