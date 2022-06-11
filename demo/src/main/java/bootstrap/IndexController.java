@@ -77,6 +77,16 @@ public class IndexController {
 	 {
 		 model.addAttribute("budgets",BudgetService.findAll());
 		model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+		
+		double total=0;
+		List<Budget> b = BudgetService.findAll();
+		for (int i= 0;i<b.size();i++)
+		{
+			total = total+b.get(i).getPrice();
+		}
+		
+		 // get the total of your list
+				  model.addAttribute("total", total);
 		 return "showBudgets";
 	 }
 
@@ -110,7 +120,15 @@ public class IndexController {
           
 		 model.addAttribute("budgets",BudgetService.findByDate(budgetToAdd.getDate()));
 			model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
-		
+			double total=0;
+			List<Budget> b = BudgetService.findAll();
+			for (int i= 0;i<b.size();i++)
+			{
+				total = total+b.get(i).getPrice();
+			}
+			
+			 // get the total of your list
+					  model.addAttribute("total", total);
 		 
 		 
 		 return "showBudgets";

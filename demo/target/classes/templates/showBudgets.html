@@ -32,7 +32,11 @@
                     <td th:text = "${budget.date}"></td>
                     <td><a th:href="@{/delete/{id}(id=${budget.id})}">Delete</a></td>
                 </tr>
+                
             </#list>
+            
+          
         </table>
+          <span th:text="${total}">Total will go here</span>
     </body>
 </html>
