@@ -121,7 +121,7 @@ public class IndexController {
 		 model.addAttribute("budgets",BudgetService.findByDate(budgetToAdd.getDate()));
 			model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
 			double total=0;
-			List<Budget> b = BudgetService.findAll();
+			List<Budget> b = BudgetService.findByDate(budgetToAdd.getDate());
 			for (int i= 0;i<b.size();i++)
 			{
 				total = total+b.get(i).getPrice();
