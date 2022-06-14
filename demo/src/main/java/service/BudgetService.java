@@ -1,6 +1,7 @@
 package service;
 
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +27,23 @@ public class BudgetService implements IBudgetService{
 		for(int i=0;i<temp.size();i++)
 		{
 			if(temp.get(i).getDate().compareTo(d) != 0)
+							temp.remove(i);
+		}
+		return temp;
+	}
+	
+	public List<Budget> findByMonth(int month){
+		List<Budget> temp = (List<Budget>) repository.findAll();
+		for(int i=0;i<temp.size();i++)
+		{
+			
+			
+			Calendar calFromArray = Calendar.getInstance();
+			calFromArray.setTime(temp.get(i).getDate());
+			int month2 = calFromArray.get(Calendar.MONTH);
+			
+			
+			if(month != month2)
 							temp.remove(i);
 		}
 		return temp;

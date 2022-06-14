@@ -177,6 +177,43 @@ public class IndexController {
 			 
 			 return "showBudgets";
 		 }
+		 
+		 @RequestMapping(value="/selectMonth", method=RequestMethod.GET)
+		    public String selectMonth(Model model) {
+		        model.addAttribute("budgets", new Budget());
+		        //model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+		        return "selectDate";
+		    }
+		 
+		 @RequestMapping(value="/selectMonth", method=RequestMethod.POST) 
+		 public String selectMonth(Model model,@ModelAttribute("budgets") Budget 
+		     		budgetToAdd){
+				
+				 
+				// BudgetService.addBudget(budgetToAdd);
+		          
+				 model.addAttribute("budgets",BudgetService.findByMonth(budgetToAdd.getDate().getMonth()));
+					model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+					double total=0;
+					List<Budget> b = BudgetService.findByMonth(10);
+					for (int i= 0;i<b.size();i++)
+					{
+						total = total+b.get(i).getPrice();
+					}
+					
+					 // get the total of your list
+							  model.addAttribute("total", total);
+				 
+				 
+				 return "showBudgets";
+				 
+				// getBudgetsTest(model, budgetToAdd.getDate());
+		        
+		        
+		     }
+		 
+		
+		 
 }
 
 /*
