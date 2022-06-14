@@ -24,7 +24,7 @@ public class BudgetService implements IBudgetService{
 	
 	public List<Budget> findByDate(Date d){
 		List<Budget> temp = (List<Budget>) repository.findAll();
-		for(int i=0;i<temp.size();i++)
+		for(int i=temp.size()-1;i>-1;i--)
 		{
 			if(temp.get(i).getDate().compareTo(d) != 0)
 							temp.remove(i);
@@ -34,7 +34,8 @@ public class BudgetService implements IBudgetService{
 	
 	public List<Budget> findByMonth(int month){
 		List<Budget> temp = (List<Budget>) repository.findAll();
-		for(int i=0;i<temp.size();i++)
+		for(int i=temp.size()-1;i>-1;i--)
+		
 		{
 			
 			
