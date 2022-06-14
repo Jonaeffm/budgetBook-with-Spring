@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Budget;
+import domain.IntDate;
 import repositories.budgetRepository;
 import service.BudgetService;
 import service.IBudgetService;
@@ -180,22 +181,22 @@ public class IndexController {
 		 
 		 @RequestMapping(value="/selectMonth", method=RequestMethod.GET)
 		    public String selectMonth(Model model) {
-		        model.addAttribute("budgets", new Budget());
+		        model.addAttribute("intdate", new IntDate());
 		        //model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
-		        return "selectDate";
+		        return "selectMonth";
 		    }
 		 
 		 @RequestMapping(value="/selectMonth", method=RequestMethod.POST) 
-		 public String selectMonth(Model model,@ModelAttribute("budgets") Budget 
-		     		budgetToAdd){
+		 public String selectMonth(Model model,@ModelAttribute("intdate") IntDate 
+		     		dateToAdd){
 				
 				 
 				// BudgetService.addBudget(budgetToAdd);
 		          
-				 model.addAttribute("budgets",BudgetService.findByMonth(budgetToAdd.getDate().getMonth()));
+				 model.addAttribute("budgets",BudgetService.findByMonth(dateToAdd.getDate()));
 					model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
 					double total=0;
-					List<Budget> b = BudgetService.findByMonth(10);
+					List<Budget> b = BudgetService.findByMonth(dateToAdd.getDate());
 					for (int i= 0;i<b.size();i++)
 					{
 						total = total+b.get(i).getPrice();
