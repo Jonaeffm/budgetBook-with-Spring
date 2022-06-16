@@ -59,13 +59,15 @@ public class BudgetService implements IBudgetService{
 	}
 
 	public List<Budget> findByDatePlusMonth(Date d){
+		if(d.getDay()==0)
+			findByMonth(d.getMonth());
+		
 		List<Budget> temp = (List<Budget>) repository.findAll();
 		for(int i=temp.size()-1;i>-1;i--)
 		{
-			if(d.getDay()==0)
-				findByMonth(d.getMonth());
 			
-			else if(!(((temp.get(i).getDate().getMonth()==d.getMonth())&&(temp.get(i).getDate().getDay()>=d.getDay()))||((temp.get(i).getDate().getMonth()==d.getMonth()+1)&&(temp.get(i).getDate().getDay()<d.getDay()))))
+			
+			if(!(((temp.get(i).getDate().getMonth()==d.getMonth())&&(temp.get(i).getDate().getDay()>=d.getDay()))||((temp.get(i).getDate().getMonth()==d.getMonth()+1)&&(temp.get(i).getDate().getDay()<d.getDay()))||((d.getMonth()==11)&&(temp.get(i).getDate().getMonth()==0)&&(temp.get(i).getDate().getDay()<d.getDay()))))
 									temp.remove(i);
 		}
 		return temp;
