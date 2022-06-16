@@ -67,7 +67,7 @@ public class BudgetService implements IBudgetService{
 		{
 			
 			
-			if(!(((temp.get(i).getDate().getMonth()==d.getMonth())&&(temp.get(i).getDate().getDay()>=d.getDay()))||((temp.get(i).getDate().getMonth()==d.getMonth()+1)&&(temp.get(i).getDate().getDay()<d.getDay()))||((d.getMonth()==11)&&(temp.get(i).getDate().getMonth()==0)&&(temp.get(i).getDate().getDay()<d.getDay()))))
+			if(!((((temp.get(i).getDate().getMonth()==d.getMonth())&&(temp.get(i).getDate().getDay()>=d.getDay()))||((temp.get(i).getDate().getMonth()==d.getMonth()+1)&&(temp.get(i).getDate().getDay()<d.getDay())))||((d.getMonth()==11)&&(temp.get(i).getDate().getMonth()==0)&&(temp.get(i).getDate().getDay()<d.getDay()))))
 									temp.remove(i);
 		}
 		return temp;
