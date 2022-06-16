@@ -60,13 +60,11 @@ public class BudgetService implements IBudgetService{
 	}
 
 	public List<Budget> findByDatePlusMonth(Date d){
-		if(d.getDay()==0)
-			findByMonth(d.getMonth());
+		
 		
 		LocalDate localDateD = d.toLocalDate();
 		
-		if(localDateD.getDayOfMonth()==1)
-			findByMonth(localDateD.getMonthValue()-1);
+		
 		
 		List<Budget> temp = (List<Budget>) repository.findAll();
 		for(int i=temp.size()-1;i>-1;i--)
