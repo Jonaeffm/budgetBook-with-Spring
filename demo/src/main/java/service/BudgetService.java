@@ -1,6 +1,7 @@
 package service;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
@@ -62,12 +63,14 @@ public class BudgetService implements IBudgetService{
 		if(d.getDay()==0)
 			findByMonth(d.getMonth());
 		
+		LocalDate localDateD = d.toLocalDate();
+		
 		List<Budget> temp = (List<Budget>) repository.findAll();
 		for(int i=temp.size()-1;i>-1;i--)
 		{
+			LocalDate localDateTemp = temp.get(i).getDate().toLocalDate();
 			
-			
-			if(!((((temp.get(i).getDate().getMonth()==d.getMonth())&&(temp.get(i).getDate().getDay()>=d.getDay()))||((temp.get(i).getDate().getMonth()==d.getMonth()+1)&&(temp.get(i).getDate().getDay()<d.getDay())))||((d.getMonth()==11)&&(temp.get(i).getDate().getMonth()==0)&&(temp.get(i).getDate().getDay()<d.getDay()))))
+			if(!((((localDateTemp.getMonthValue()==localDateD.getMonthValue())&&(localDateTemp.getDayOfMonth()>=localDateD.getDayOfMonth()))||((localDateTemp.getMonthValue()==localDateD.getMonthValue()+1)&&(localDateTemp.getDayOfMonth()<localDateD.getDayOfMonth())))||((localDateD.getMonthValue()==12)&&(localDateTemp.getMonthValue()==1)&&(localDateTemp.getDayOfMonth()<localDateD.getDayOfMonth()))))
 									temp.remove(i);
 		}
 		return temp;
