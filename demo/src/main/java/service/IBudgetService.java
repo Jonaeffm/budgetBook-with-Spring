@@ -14,6 +14,7 @@ public interface IBudgetService {
 	public void deleteById(long ID);
 	public List<Budget> findByDate(Date d);
 	public List<Budget> findByMonth(int month);
+	public List<Budget> findByDatePlusMonth(Date d);
 }
 /*package com.zetcode.service;
 

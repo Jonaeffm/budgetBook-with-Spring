@@ -212,7 +212,40 @@ public class IndexController {
 		        
 		        
 		     }
+		 //_____________________________________
+		 @RequestMapping(value="/selectDatePlusMonth", method=RequestMethod.GET)
+		    public String selectDatePlusMonth(Model model) {
+		        model.addAttribute("budgets", new Budget());
+		        //model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+		        return "selectDate";
+		    }
 		 
+		 @RequestMapping(value="/selectDatePlusMonth", method=RequestMethod.POST) 
+	     public String selectDatePlusMonth(Model model,@ModelAttribute("budgets") Budget 
+	     		budgetToAdd){
+			
+			 
+			// BudgetService.addBudget(budgetToAdd);
+	          
+			 model.addAttribute("budgets",BudgetService.findByDatePlusMonth(budgetToAdd.getDate()));
+				model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+				double total=0;
+				List<Budget> b = BudgetService.findByDatePlusMonth(budgetToAdd.getDate());
+				for (int i= 0;i<b.size();i++)
+				{
+					total = total+b.get(i).getPrice();
+				}
+				
+				 // get the total of your list
+						  model.addAttribute("total", total);
+			 
+			 
+			 return "showBudgets";
+			 
+			// getBudgetsTest(model, budgetToAdd.getDate());
+	        
+	        
+	     }
 		
 		 
 }
