@@ -23,6 +23,9 @@ public class Income {
 		setDetail(de);
 		setValue(v);
 	}
+	public Income() {
+		
+	};
 	
 	public Date getDate() {
 		return date;
@@ -42,5 +45,11 @@ public class Income {
 	public void setValue(Double value) {
 		this.value = value;
 	}
-	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 }

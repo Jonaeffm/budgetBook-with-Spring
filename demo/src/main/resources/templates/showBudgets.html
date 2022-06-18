@@ -8,12 +8,38 @@
 
     <body>
 
-        <h2>List of products</h2>
+        <h2>List of incomes</h2>
 
        <a href="/addBudget">add</a>
        <a href="/selectDate">date</a>
        <a href="/budgets">all dates</a>
        <a href="/selectMonth">month</a>
+
+<table>
+            <tr>
+                <th>Id</th>
+                <th>Detail</th>
+                <th>Value</th>
+                <th>Date</th>
+                <th>Delete</th>
+            </tr>
+
+
+
+                <tr th:each="income, stat : ${#lists.sort(incomes,byIncomeDate)}">
+                    <td th:text = "${income.id}"></td>
+                    <td th:text = "${income.detail}"></td>
+                    <td th:text = "${income.value}"></td>
+                    <td th:text = "${income.date}"></td>
+                    <td><a th:href="@{/delete/{id}(id=${income.id})}">Delete</a></td>
+                </tr>
+                
+  
+            
+          
+        </table>
+
+        <h2>List of products</h2>
 
         <table>
             <tr>

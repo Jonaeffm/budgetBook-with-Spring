@@ -26,10 +26,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Budget;
+import domain.Income;
 import domain.IntDate;
 import repositories.budgetRepository;
 import service.BudgetService;
 import service.IBudgetService;
+import service.IIncomeService;
 
 
 @Controller
@@ -43,6 +45,8 @@ public class IndexController {
 	 @Autowired
 	 private IBudgetService BudgetService;
 	 
+	 @Autowired
+	 private IIncomeService IncomeService;
 	
 	/*
 	@RequestMapping(method = RequestMethod.GET, value ="/test/")
@@ -76,8 +80,10 @@ public class IndexController {
 	 @GetMapping("/budgets")
 	 public String getBudgets(Model model)
 	 {
+		 model.addAttribute("incomes",IncomeService.findAll());
 		 model.addAttribute("budgets",BudgetService.findAll());
 		model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+		model.addAttribute("byIncomeDate", Comparator.comparing(Income::getDate));
 		
 		double total=0;
 		List<Budget> b = BudgetService.findAll();
@@ -118,9 +124,11 @@ public class IndexController {
 		
 		 
 		// BudgetService.addBudget(budgetToAdd);
-          
+		 model.addAttribute("incomes",IncomeService.findByDate(budgetToAdd.getDate()));
 		 model.addAttribute("budgets",BudgetService.findByDate(budgetToAdd.getDate()));
 			model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+			model.addAttribute("byIncomeDate", Comparator.comparing(Income::getDate));
+			
 			double total=0;
 			List<Budget> b = BudgetService.findByDate(budgetToAdd.getDate());
 			for (int i= 0;i<b.size();i++)
@@ -173,7 +181,7 @@ public class IndexController {
 			
 				 model.addAttribute("budgets",BudgetService.findByDate(d));
 				model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
-			
+				model.addAttribute("byIncomeDate", Comparator.comparing(Income::getDate));
 			 
 			 
 			 return "showBudgets";
@@ -192,9 +200,10 @@ public class IndexController {
 				
 				 
 				// BudgetService.addBudget(budgetToAdd);
-		          
+			 model.addAttribute("incomes",IncomeService.findByMonth(dateToAdd.getDate()));
 				 model.addAttribute("budgets",BudgetService.findByMonth(dateToAdd.getDate()));
 					model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+					model.addAttribute("byIncomeDate", Comparator.comparing(Income::getDate));
 					double total=0;
 					List<Budget> b = BudgetService.findByMonth(dateToAdd.getDate());
 					for (int i= 0;i<b.size();i++)
@@ -226,9 +235,10 @@ public class IndexController {
 			
 			 
 			// BudgetService.addBudget(budgetToAdd);
-	          
+			 model.addAttribute("incomes",IncomeService.findByDatePlusMonth(budgetToAdd.getDate()));
 			 model.addAttribute("budgets",BudgetService.findByDatePlusMonth(budgetToAdd.getDate()));
 				model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+				model.addAttribute("byIncomeDate", Comparator.comparing(Income::getDate));
 				double total=0;
 				List<Budget> b = BudgetService.findByDatePlusMonth(budgetToAdd.getDate());
 				for (int i= 0;i<b.size();i++)
