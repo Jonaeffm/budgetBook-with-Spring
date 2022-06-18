@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Budget;
+import domain.Income;
+import repositories.IncomeRepository;
 import repositories.budgetRepository;
 
 @EnableAutoConfiguration
@@ -31,7 +33,8 @@ public class BootStrapData implements CommandLineRunner{
 
 	@Autowired
 	private budgetRepository bR2;
-	
+	@Autowired
+	private IncomeRepository iR;
 	
 
     
@@ -50,10 +53,10 @@ public class BootStrapData implements CommandLineRunner{
 		
 		Budget cigarettes = new Budget(date,"cigarettes",(double) 1000);
 		bR2.save(cigarettes);
-		
-		
+		Income money = new Income(date,"gift",(double) 10000);
+		iR.save(money);
 		System.out.print("Number of elements: "+bR2.count());
-
+		System.out.print("Number of incomes"+iR.count());
 
 		
 		

@@ -12,7 +12,7 @@ import jakarta.persistence.Id;
 
 
 @Entity
-public class Budget {//implements Comparable<Budget> {
+public class Budget {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
  private long id;
