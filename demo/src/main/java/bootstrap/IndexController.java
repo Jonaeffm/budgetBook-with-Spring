@@ -87,11 +87,16 @@ public class IndexController {
 		
 		double total=0;
 		List<Budget> b = BudgetService.findAll();
-		for (int i= 0;i<b.size();i++)
+		List<Income> ic = IncomeService.findAll();
+ 		for (int i= 0;i<b.size();i++)
 		{
-			total = total+b.get(i).getPrice();
+ 			
+			total = total-b.get(i).getPrice();
 		}
-		
+ 		for (int i= 0;i<ic.size();i++)
+		{
+ 		total = total+ic.get(i).getValue();
+		}
 		 // get the total of your list
 				  model.addAttribute("total", total);
 		 return "showBudgets";
