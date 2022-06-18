@@ -8,13 +8,15 @@
 
     <body>
 
-        <h2>List of incomes</h2>
-
-       <a href="/addBudget">add</a>
+ <a href="/addBudget">add</a>
        <a href="/selectDate">date</a>
        <a href="/budgets">all dates</a>
-       <a href="/selectMonth">month</a>
+       <a href="/selectDatePlusMonth">month</a>
 
+
+        <h2>List of incomes</h2>
+
+      
 <table>
             <tr>
                 <th>Id</th>
@@ -31,7 +33,7 @@
                     <td th:text = "${income.detail}"></td>
                     <td th:text = "${income.value}"></td>
                     <td th:text = "${income.date}"></td>
-                    <td><a th:href="@{/delete/{id}(id=${income.id})}">Delete</a></td>
+                    <td><a th:href="@{/deleteIncome/{id}(id=${income.id})}">Delete</a></td>
                 </tr>
                 
   

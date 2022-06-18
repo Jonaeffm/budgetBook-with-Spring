@@ -147,6 +147,11 @@ public class IndexController {
         
      }
 	 
+	 @GetMapping("/deleteIncome/{id}")
+	 public String deleteIncome(@PathVariable("id") long id, Model model) {
+	     
+	     IncomeService.deleteById(id);
+	     return "redirect:/budgets";}
 	 
 	 @GetMapping("/delete/{id}")
 	 public String deleteBudget(@PathVariable("id") long id, Model model) {
