@@ -267,6 +267,19 @@ public class IndexController {
 	        
 	     }
 		
+		 @RequestMapping(value="/addIncome", method=RequestMethod.GET)
+		    public String showIncomeInfo(Model model) {
+		        model.addAttribute("incomes", new Income());
+		        //model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+		        return "insertIncome";
+		    }
+		 
+		 @RequestMapping(value="/addIncome", method=RequestMethod.POST) 
+	        public String processIncomeInfo(@ModelAttribute("incomes") Income 
+	        		incomeToAdd){ 
+	            IncomeService.addIncome(incomeToAdd);
+	            return "success"; 
+	        }
 		 
 }
 
