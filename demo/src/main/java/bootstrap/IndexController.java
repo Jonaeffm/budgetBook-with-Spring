@@ -214,11 +214,18 @@ public class IndexController {
 				 model.addAttribute("budgets",BudgetService.findByMonth(dateToAdd.getDate()));
 					model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
 					model.addAttribute("byIncomeDate", Comparator.comparing(Income::getDate));
+					
 					double total=0;
 					List<Budget> b = BudgetService.findByMonth(dateToAdd.getDate());
-					for (int i= 0;i<b.size();i++)
+					List<Income> ic = IncomeService.findByMonth(dateToAdd.getDate());
+			 		for (int i= 0;i<b.size();i++)
 					{
-						total = total+b.get(i).getPrice();
+			 			
+						total = total-b.get(i).getPrice();
+					}
+			 		for (int i= 0;i<ic.size();i++)
+					{
+			 		total = total+ic.get(i).getValue();
 					}
 					
 					 // get the total of your list
@@ -249,11 +256,18 @@ public class IndexController {
 			 model.addAttribute("budgets",BudgetService.findByDatePlusMonth(budgetToAdd.getDate()));
 				model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
 				model.addAttribute("byIncomeDate", Comparator.comparing(Income::getDate));
+				
 				double total=0;
 				List<Budget> b = BudgetService.findByDatePlusMonth(budgetToAdd.getDate());
-				for (int i= 0;i<b.size();i++)
+				List<Income> ic = IncomeService.findByDatePlusMonth(budgetToAdd.getDate());
+		 		for (int i= 0;i<b.size();i++)
 				{
-					total = total+b.get(i).getPrice();
+		 			
+					total = total-b.get(i).getPrice();
+				}
+		 		for (int i= 0;i<ic.size();i++)
+				{
+		 		total = total+ic.get(i).getValue();
 				}
 				
 				 // get the total of your list
