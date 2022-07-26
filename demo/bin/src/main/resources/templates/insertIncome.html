@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+  
+   <form method="post" th:object="${incomes}">
+
+<label for="income.detail">detail</label> 
+<input type="text" class="form-control" id="detail"  th:field="*{detail}" placeholder="Enter detail" />                  
+                        <label for="value">value</label> 
+                        <input type="text" class="form-control" id="value" th:field="*{value}"/>
+                        
+                        <label for="date">date</label> 
+                        <input type="text" class="form-control" id="date" th:field="*{date}"/>
+                        
+
+<!--    <button type="submit" class="btn btn-primary">Sign in</button> -->
+
+<input type="submit" value="Submit" class="btn btn-primary" />
+</body>
+
+
+</html>

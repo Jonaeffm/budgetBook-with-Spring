@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Show budgets</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        </head>
+
+    <body>
+
+ <a href="/addBudget">add</a>
+  <a href="/addIncome">add income</a>
+       <a href="/selectDate">date</a>
+       <a href="/budgets">all dates</a>
+       <a href="/selectDatePlusMonth">month</a>
+
+
+        <h2>List of incomes</h2>
+
+      
+<table>
+            <tr>
+                <th>Id</th>
+                <th>Detail</th>
+                <th>Value</th>
+                <th>Date</th>
+                <th>Delete</th>
+            </tr>
+
+
+
+                <tr th:each="income, stat : ${#lists.sort(incomes,byIncomeDate)}">
+                    <td th:text = "${income.id}"></td>
+                    <td th:text = "${income.detail}"></td>
+                    <td th:text = "${income.value}"></td>
+                    <td th:text = "${income.date}"></td>
+                    <td><a th:href="@{/deleteIncome/{id}(id=${income.id})}">Delete</a></td>
+                </tr>
+                
+  
+            
+          
+        </table>
+
+        <h2>List of products</h2>
+
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Date</th>
+                <th>Delete</th>
+            </tr>
+
+
+
+                <tr th:each="budget, stat : ${#lists.sort(budgets,byDate)}">
+                    <td th:text = "${budget.id}"></td>
+                    <td th:text = "${budget.product}"></td>
+                    <td th:text = "${budget.price}"></td>
+                    <td th:text = "${budget.date}"></td>
+                    <td><a th:href="@{/delete/{id}(id=${budget.id})}">Delete</a></td>
+                </tr>
+                
+  
+            
+          
+        </table>
+         <h2>sum </h2>
+          <span th:text="${total}">Total will go here</span>
+    </body>
+</html>

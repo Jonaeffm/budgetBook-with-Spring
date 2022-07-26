@@ -1,18 +1,10 @@
 package bootstrap;
 
-import java.io.IOException;
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,303 +12,272 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Budget;
 import domain.Income;
 import domain.IntDate;
-import repositories.budgetRepository;
-import service.BudgetService;
 import service.IBudgetService;
 import service.IIncomeService;
-
 
 @Controller
 public class IndexController {
 
-	/*IndexController(IBudgetService BudgetService){
-		this.BudgetService = BudgetService;
-		
-	}*/
-	
-	 @Autowired
-	 private IBudgetService BudgetService;
-	 
-	 @Autowired
-	 private IIncomeService IncomeService;
-	
 	/*
-	@RequestMapping(method = RequestMethod.GET, value ="/test/")
-	public ModelAndView Index() throws IOException
-	{
-		/*System.out.println("TEST");
-		return "index.html";*/
-		/*ModelAndView modelAndView = new ModelAndView();
-	    modelAndView.setViewName("index.html");
-	    return modelAndView;*/
+	 * IndexController(IBudgetService BudgetService){ this.BudgetService =
+	 * BudgetService;
+	 * 
+	 * }
+	 */
+
+	@Autowired
+	private IBudgetService BudgetService;
+
+	@Autowired
+	private IIncomeService IncomeService;
+
 	/*
-		    ModelAndView modelAndView = new ModelAndView();
-		    modelAndView.setViewName("index.html");
-		    return modelAndView;
-		
-	}*/
-	
-	/*@GetMapping("/budgets")
-	@ResponseBody
-	public ModelAndView getBudget(Model model) {
+	 * @RequestMapping(method = RequestMethod.GET, value ="/test/") public
+	 * ModelAndView Index() throws IOException { /*System.out.println("TEST");
+	 * return "index.html";
+	 */
+	/*
+	 * ModelAndView modelAndView = new ModelAndView();
+	 * modelAndView.setViewName("index.html"); return modelAndView;
+	 */
+	/*
+	 * ModelAndView modelAndView = new ModelAndView();
+	 * modelAndView.setViewName("index.html"); return modelAndView;
+	 * 
+	 * }
+	 */
 
-        var Budgets = (List<Budget>) BudgetService.findAll();
+	/*
+	 * @GetMapping("/budgets")
+	 * 
+	 * @ResponseBody public ModelAndView getBudget(Model model) {
+	 * 
+	 * var Budgets = (List<Budget>) BudgetService.findAll();
+	 * 
+	 * var params = new HashMap<String, Object>(); params.put("budgets", Budgets);
+	 * 
+	 * return new ModelAndView("showBudgets", params); //model.addAttribute(
+	 * attributeName: "budgets",BudgetService.findAll()); }
+	 */
 
-        var params = new HashMap<String, Object>();
-        params.put("budgets", Budgets);
-
-        return new ModelAndView("showBudgets", params);
-		//model.addAttribute( attributeName: "budgets",BudgetService.findAll());
-    }*/
-	 
-	 @GetMapping("/budgets")
-	 public String getBudgets(Model model)
-	 {
-		 model.addAttribute("incomes",IncomeService.findAll());
-		 model.addAttribute("budgets",BudgetService.findAll());
+	@GetMapping("/budgets")
+	public String getBudgets(Model model) {
+		model.addAttribute("incomes", IncomeService.findAll());
+		model.addAttribute("budgets", BudgetService.findAll());
 		model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
-		model.addAttribute("byIncomeDate", Comparator.comparing(Income::getDate));
-		
-		double total=0;
+		model.addAttribute("byIncomeDate", Comparator.comparing(Income::getInserted));
+
+		double total = 0;
 		List<Budget> b = BudgetService.findAll();
 		List<Income> ic = IncomeService.findAll();
- 		for (int i= 0;i<b.size();i++)
-		{
- 			
-			total = total-b.get(i).getPrice();
-		}
- 		for (int i= 0;i<ic.size();i++)
-		{
- 		total = total+ic.get(i).getValue();
-		}
-		 // get the total of your list
-				  model.addAttribute("total", total);
-		 return "showBudgets";
-	 }
+		for (int i = 0; i < b.size(); i++) {
 
-	  @RequestMapping(value="/addBudget", method=RequestMethod.GET)
-	    public String showStudentInfo(Model model) {
-	        model.addAttribute("budgets", new Budget());
-	        //model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
-	        return "insert";
-	    }
-	 
-	 @RequestMapping(value="/addBudget", method=RequestMethod.POST) 
-        public String processStudentInfo(@ModelAttribute("budgets") Budget 
-        		budgetToAdd){ 
-            BudgetService.addBudget(budgetToAdd);
-            return "success"; 
-        }
-	 
-	 @RequestMapping(value="/selectDate", method=RequestMethod.GET)
-	    public String selectDate(Model model) {
-	        model.addAttribute("budgets", new Budget());
-	        //model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
-	        return "selectDate";
-	    }
-	 
-	 @RequestMapping(value="/selectDate", method=RequestMethod.POST) 
-     public String selectDate(Model model,@ModelAttribute("budgets") Budget 
-     		budgetToAdd){
-		
-		 
+			total = total - b.get(i).getPrice();
+		}
+		for (int i = 0; i < ic.size(); i++) {
+			total = total + ic.get(i).getAmount();
+		}
+		// get the total of your list
+		model.addAttribute("total", total);
+		return "showBudgets";
+	}
+
+	@RequestMapping(value = "/addBudget", method = RequestMethod.GET)
+	public String showStudentInfo(Model model) {
+		model.addAttribute("budgets", new Budget());
+		// model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+		return "insert";
+	}
+
+	@RequestMapping(value = "/addBudget", method = RequestMethod.POST)
+	public String processStudentInfo(@ModelAttribute("budgets") Budget budgetToAdd) {
+		BudgetService.addBudget(budgetToAdd);
+		return "success";
+	}
+
+	@RequestMapping(value = "/selectDate", method = RequestMethod.GET)
+	public String selectDate(Model model) {
+		model.addAttribute("budgets", new Budget());
+		// model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+		return "selectDate";
+	}
+
+	@RequestMapping(value = "/selectDate", method = RequestMethod.POST)
+	public String selectDate(Model model, @ModelAttribute("budgets") Budget budgetToAdd) {
+
 		// BudgetService.addBudget(budgetToAdd);
-		 model.addAttribute("incomes",IncomeService.findByDate(budgetToAdd.getDate()));
-		 model.addAttribute("budgets",BudgetService.findByDate(budgetToAdd.getDate()));
-			model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
-			model.addAttribute("byIncomeDate", Comparator.comparing(Income::getDate));
-			
-			double total=0;
-			List<Budget> b = BudgetService.findByDate(budgetToAdd.getDate());
-			for (int i= 0;i<b.size();i++)
-			{
-				total = total+b.get(i).getPrice();
-			}
-			
-			 // get the total of your list
-					  model.addAttribute("total", total);
-		 
-		 
-		 return "showBudgets";
-		 
+		model.addAttribute("incomes", IncomeService.findByDate(budgetToAdd.getDate()));
+		model.addAttribute("budgets", BudgetService.findByDate(budgetToAdd.getDate()));
+		model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+		model.addAttribute("byIncomeDate", Comparator.comparing(Income::getInserted));
+
+		double total = 0;
+		List<Budget> b = BudgetService.findByDate(budgetToAdd.getDate());
+		List<Income> ic = IncomeService.findByDate(budgetToAdd.getDate());
+		for (int i = 0; i < b.size(); i++) {
+
+			total = total - b.get(i).getPrice();
+		}
+		for (int i = 0; i < ic.size(); i++) {
+			total = total + ic.get(i).getAmount();
+		}
+		// get the total of your list
+		model.addAttribute("total", total);
+
+		return "showBudgets";
+
 		// getBudgetsTest(model, budgetToAdd.getDate());
-        
-        
-     }
-	 
-	 @GetMapping("/deleteIncome/{id}")
-	 public String deleteIncome(@PathVariable("id") long id, Model model) {
-	     
-	     IncomeService.deleteById(id);
-	     return "redirect:/budgets";}
-	 
-	 @GetMapping("/delete/{id}")
-	 public String deleteBudget(@PathVariable("id") long id, Model model) {
-	     
-	     BudgetService.deleteById(id);
-	     return "redirect:/budgets";}
 
-        /*    @RequestMapping(method = RequestMethod.GET, value = "/test2/")
-	    public ModelAndView welcome() {
-	        ModelAndView modelAndView = new ModelAndView();
-	        modelAndView.setViewName("index.html");
-	        return modelAndView;
-	    }
-	*/
-	 
-	   @GetMapping(value = "/show")
-	    public ModelAndView show() {
+	}
 
-	        var mav = new ModelAndView();
+	@GetMapping("/deleteIncome/{id}")
+	public String deleteIncome(@PathVariable("id") long id, Model model) {
 
-	       
-	        mav.setViewName("index");
+		IncomeService.deleteById(id);
+		return "redirect:/budgets";
+	}
 
-	        return mav;
-	    }
-	
-	   
+	@GetMapping("/delete/{id}")
+	public String deleteBudget(@PathVariable("id") long id, Model model) {
 
-		 @GetMapping("/budgetsTest")
-		 public String getBudgetsTest(Model model,Date d)
-		 {
-			
-				 model.addAttribute("budgets",BudgetService.findByDate(d));
-				model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
-				model.addAttribute("byIncomeDate", Comparator.comparing(Income::getDate));
-			 
-			 
-			 return "showBudgets";
-		 }
-		 
-		 @RequestMapping(value="/selectMonth", method=RequestMethod.GET)
-		    public String selectMonth(Model model) {
-		        model.addAttribute("intdate", new IntDate());
-		        //model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
-		        return "selectMonth";
-		    }
-		 
-		 @RequestMapping(value="/selectMonth", method=RequestMethod.POST) 
-		 public String selectMonth(Model model,@ModelAttribute("intdate") IntDate 
-		     		dateToAdd){
-				
-				 
-				// BudgetService.addBudget(budgetToAdd);
-			 model.addAttribute("incomes",IncomeService.findByMonth(dateToAdd.getDate()));
-				 model.addAttribute("budgets",BudgetService.findByMonth(dateToAdd.getDate()));
-					model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
-					model.addAttribute("byIncomeDate", Comparator.comparing(Income::getDate));
-					
-					double total=0;
-					List<Budget> b = BudgetService.findByMonth(dateToAdd.getDate());
-					List<Income> ic = IncomeService.findByMonth(dateToAdd.getDate());
-			 		for (int i= 0;i<b.size();i++)
-					{
-			 			
-						total = total-b.get(i).getPrice();
-					}
-			 		for (int i= 0;i<ic.size();i++)
-					{
-			 		total = total+ic.get(i).getValue();
-					}
-					
-					 // get the total of your list
-							  model.addAttribute("total", total);
-				 
-				 
-				 return "showBudgets";
-				 
-				// getBudgetsTest(model, budgetToAdd.getDate());
-		        
-		        
-		     }
-		 //_____________________________________
-		 @RequestMapping(value="/selectDatePlusMonth", method=RequestMethod.GET)
-		    public String selectDatePlusMonth(Model model) {
-		        model.addAttribute("budgets", new Budget());
-		        //model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
-		        return "selectDate";
-		    }
-		 
-		 @RequestMapping(value="/selectDatePlusMonth", method=RequestMethod.POST) 
-	     public String selectDatePlusMonth(Model model,@ModelAttribute("budgets") Budget 
-	     		budgetToAdd){
-			
-			 
-			// BudgetService.addBudget(budgetToAdd);
-			 model.addAttribute("incomes",IncomeService.findByDatePlusMonth(budgetToAdd.getDate()));
-			 model.addAttribute("budgets",BudgetService.findByDatePlusMonth(budgetToAdd.getDate()));
-				model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
-				model.addAttribute("byIncomeDate", Comparator.comparing(Income::getDate));
-				
-				double total=0;
-				List<Budget> b = BudgetService.findByDatePlusMonth(budgetToAdd.getDate());
-				List<Income> ic = IncomeService.findByDatePlusMonth(budgetToAdd.getDate());
-		 		for (int i= 0;i<b.size();i++)
-				{
-		 			
-					total = total-b.get(i).getPrice();
-				}
-		 		for (int i= 0;i<ic.size();i++)
-				{
-		 		total = total+ic.get(i).getValue();
-				}
-				
-				 // get the total of your list
-						  model.addAttribute("total", total);
-			 
-			 
-			 return "showBudgets";
-			 
-			// getBudgetsTest(model, budgetToAdd.getDate());
-	        
-	        
-	     }
-		
-		 @RequestMapping(value="/addIncome", method=RequestMethod.GET)
-		    public String showIncomeInfo(Model model) {
-		        model.addAttribute("incomes", new Income());
-		        //model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
-		        return "insertIncome";
-		    }
-		 
-		 @RequestMapping(value="/addIncome", method=RequestMethod.POST) 
-	        public String processIncomeInfo(@ModelAttribute("incomes") Income 
-	        		incomeToAdd){ 
-	            IncomeService.addIncome(incomeToAdd);
-	            return "success"; 
-	        }
-		 
+		BudgetService.deleteById(id);
+		return "redirect:/budgets";
+	}
+
+	/*
+	 * @RequestMapping(method = RequestMethod.GET, value = "/test2/") public
+	 * ModelAndView welcome() { ModelAndView modelAndView = new ModelAndView();
+	 * modelAndView.setViewName("index.html"); return modelAndView; }
+	 */
+
+	@GetMapping(value = "/show")
+	public ModelAndView show() {
+
+		var mav = new ModelAndView();
+
+		mav.setViewName("index");
+
+		return mav;
+	}
+
+	@GetMapping("/budgetsTest")
+	public String getBudgetsTest(Model model, Date d) {
+
+		model.addAttribute("budgets", BudgetService.findByDate(d));
+		model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+		model.addAttribute("byIncomeDate", Comparator.comparing(Income::getInserted));
+
+		return "showBudgets";
+	}
+
+	@RequestMapping(value = "/selectMonth", method = RequestMethod.GET)
+	public String selectMonth(Model model) {
+		model.addAttribute("intdate", new IntDate());
+		// model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+		return "selectMonth";
+	}
+
+	@RequestMapping(value = "/selectMonth", method = RequestMethod.POST)
+	public String selectMonth(Model model, @ModelAttribute("intdate") IntDate dateToAdd) {
+
+		// BudgetService.addBudget(budgetToAdd);
+		model.addAttribute("incomes", IncomeService.findByMonth(dateToAdd.getDate()));
+		model.addAttribute("budgets", BudgetService.findByMonth(dateToAdd.getDate()));
+		model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+		model.addAttribute("byIncomeDate", Comparator.comparing(Income::getInserted));
+
+		double total = 0;
+		List<Budget> b = BudgetService.findByMonth(dateToAdd.getDate());
+		List<Income> ic = IncomeService.findByMonth(dateToAdd.getDate());
+		for (int i = 0; i < b.size(); i++) {
+
+			total = total - b.get(i).getPrice();
+		}
+		for (int i = 0; i < ic.size(); i++) {
+			total = total + ic.get(i).getAmount();
+		}
+
+		// get the total of your list
+		model.addAttribute("total", total);
+
+		return "showBudgets";
+
+		// getBudgetsTest(model, budgetToAdd.getDate());
+
+	}
+
+	// _____________________________________
+	@RequestMapping(value = "/selectDatePlusMonth", method = RequestMethod.GET)
+	public String selectDatePlusMonth(Model model) {
+		model.addAttribute("budgets", new Budget());
+		// model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+		return "selectDate";
+	}
+
+	@RequestMapping(value = "/selectDatePlusMonth", method = RequestMethod.POST)
+	public String selectDatePlusMonth(Model model, @ModelAttribute("budgets") Budget budgetToAdd) {
+
+		// BudgetService.addBudget(budgetToAdd);
+		model.addAttribute("incomes", IncomeService.findByDatePlusMonth(budgetToAdd.getDate()));
+		model.addAttribute("budgets", BudgetService.findByDatePlusMonth(budgetToAdd.getDate()));
+		model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+		model.addAttribute("byIncomeDate", Comparator.comparing(Income::getInserted));
+
+		double total = 0;
+		List<Budget> b = BudgetService.findByDatePlusMonth(budgetToAdd.getDate());
+		List<Income> ic = IncomeService.findByDatePlusMonth(budgetToAdd.getDate());
+		for (int i = 0; i < b.size(); i++) {
+
+			total = total - b.get(i).getPrice();
+		}
+		for (int i = 0; i < ic.size(); i++) {
+			total = total + ic.get(i).getAmount();
+		}
+
+		// get the total of your list
+		model.addAttribute("total", total);
+
+		return "showBudgets";
+
+		// getBudgetsTest(model, budgetToAdd.getDate());
+
+	}
+
+	@RequestMapping(value = "/addIncome", method = RequestMethod.GET)
+	public String showIncomeInfo(Model model) {
+		model.addAttribute("incomes", new Income());
+		// model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+		return "insertIncome";
+	}
+
+	@RequestMapping(value = "/addIncome", method = RequestMethod.POST)
+	public String processIncomeInfo(@ModelAttribute("incomes") Income incomeToAdd) {
+		IncomeService.addIncome(incomeToAdd);
+		return "success";
+	}
+
 }
 
 /*
  * 
  *
- *@Controller
-public class MyController {
-
-    @Autowired
-    private ICountryService countryService;
-
-    @GetMapping("/countries")
-    public ModelAndView getCountries() {
-
-        var countries = (List<Country>) countryService.findAll();
-
-        var params = new HashMap<String, Object>();
-        params.put("countries", countries);
-
-        return new ModelAndView("showCountries", params);
-    }
-}
+ * @Controller public class MyController {
+ * 
+ * @Autowired private ICountryService countryService;
+ * 
+ * @GetMapping("/countries") public ModelAndView getCountries() {
+ * 
+ * var countries = (List<Country>) countryService.findAll();
+ * 
+ * var params = new HashMap<String, Object>(); params.put("countries",
+ * countries);
+ * 
+ * return new ModelAndView("showCountries", params); } }
  *
  *
  *

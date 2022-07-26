@@ -1,9 +1,6 @@
 package com.example.demo;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import repositories.budgetRepository;
 
 @Configuration
 public class AppConfig {

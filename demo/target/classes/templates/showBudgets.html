@@ -8,9 +8,9 @@
 
     <body>
 
- <a href="/addBudget">add</a>
+ <a href="/addBudget">add product</a>
   <a href="/addIncome">add income</a>
-       <a href="/selectDate">date</a>
+       <a href="/selectDate">filter by date</a>
        <a href="/budgets">all dates</a>
        <a href="/selectDatePlusMonth">month</a>
 
@@ -32,8 +32,8 @@
                 <tr th:each="income, stat : ${#lists.sort(incomes,byIncomeDate)}">
                     <td th:text = "${income.id}"></td>
                     <td th:text = "${income.detail}"></td>
-                    <td th:text = "${income.value}"></td>
-                    <td th:text = "${income.date}"></td>
+                    <td th:text = "${income.amount}"></td>
+                    <td th:text = "${income.inserted}"></td>
                     <td><a th:href="@{/deleteIncome/{id}(id=${income.id})}">Delete</a></td>
                 </tr>
                 
