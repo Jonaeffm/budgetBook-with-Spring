@@ -8,10 +8,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import domain.Budget;
 import domain.Income;
 import repositories.IncomeRepository;
-import repositories.budgetRepository;
 
 @Service
 public class IncomeService implements IIncomeService{
@@ -42,7 +40,7 @@ public class IncomeService implements IIncomeService{
 		List<Income> temp = (List<Income>) repository.findAll();
 		for(int i=temp.size()-1;i>-1;i--)
 		{
-			if(temp.get(i).getDate().compareTo(d) != 0)
+			if(temp.get(i).getInserted().compareTo(d) != 0)
 							temp.remove(i);
 		}
 		return temp;
@@ -57,7 +55,7 @@ public class IncomeService implements IIncomeService{
 			
 			
 			Calendar calFromArray = Calendar.getInstance();
-			calFromArray.setTime(temp.get(i).getDate());
+			calFromArray.setTime(temp.get(i).getInserted());
 			int month2 = calFromArray.get(Calendar.MONTH);
 			
 			
@@ -76,7 +74,7 @@ LocalDate localDateD = d.toLocalDate();
 		List<Income> temp = (List<Income>) repository.findAll();
 		for(int i=temp.size()-1;i>-1;i--)
 		{
-			LocalDate localDateTemp = temp.get(i).getDate().toLocalDate();
+			LocalDate localDateTemp = temp.get(i).getInserted().toLocalDate();
 			
 			if(!((((localDateTemp.getMonthValue()==localDateD.getMonthValue())&&(localDateTemp.getDayOfMonth()>=localDateD.getDayOfMonth())&&(localDateD.getYear()==localDateTemp.getYear()))||((localDateTemp.getMonthValue()==localDateD.getMonthValue()+1)&&(localDateTemp.getDayOfMonth()<localDateD.getDayOfMonth())&&(localDateD.getYear()==localDateTemp.getYear())))||((localDateD.getMonthValue()==12)&&(localDateTemp.getMonthValue()==1)&&(localDateTemp.getDayOfMonth()<localDateD.getDayOfMonth())&&(localDateD.getYear()+1==localDateTemp.getYear()))))
 									temp.remove(i);
