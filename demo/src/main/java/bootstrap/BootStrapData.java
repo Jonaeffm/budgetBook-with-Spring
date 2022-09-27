@@ -38,14 +38,14 @@ public class BootStrapData implements CommandLineRunner{
 //		LocalDate monthLater = ld.plusMonths( 1 );
 //		java.sql.Date d2 = java.sql.Date.valueOf( monthLater );
 		
-		Calendar c = Calendar.getInstance(); 
-		c.setTime(d); 
-		c.add(Calendar.MONTH, 1);
-		d= new java.sql.Date(c.getTimeInMillis());
-		System.out.println("test "+c);
+//		Calendar c = Calendar.getInstance(); 
+//		c.setTime(d); 
+//		c.add(Calendar.MONTH, 1);
+//		d= new java.sql.Date(c.getTimeInMillis());
+		Date d2=Date.valueOf(d.toLocalDate().plusMonths(1));
+		Budget b2 = new Budget(d2,b.getProduct(),b.getPrice());
 		
-		b.setDate(d);
-		result.add(b);
+		result.add(b2);
 		return result;
 		
 	}
@@ -70,7 +70,7 @@ public class BootStrapData implements CommandLineRunner{
 		System.out.print("Number of elements: "+bR2.count());
 		System.out.print("Number of incomes"+iR.count());
 		
-		ArrayList<Budget> test = new ArrayList<Budget>();
+		ArrayList<Budget> test ;
 		test = periodic(cigarettes);
 		System.out.println("Datum 1:"+cigarettes.getDate());
 		System.out.println("Datum 2:"+test.get(0).getDate());
