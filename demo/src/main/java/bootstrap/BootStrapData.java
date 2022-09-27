@@ -7,6 +7,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -32,10 +33,18 @@ public class BootStrapData implements CommandLineRunner{
 		//result.add(b);
 
 		Date d = b.getDate();
-		LocalDate ld = d.toLocalDate();
-		LocalDate monthLater = ld.plusMonths( 1 );
-		java.sql.Date d2 = java.sql.Date.valueOf( monthLater );
-		b.setDate(d2);
+		
+//		LocalDate ld = d.toLocalDate();
+//		LocalDate monthLater = ld.plusMonths( 1 );
+//		java.sql.Date d2 = java.sql.Date.valueOf( monthLater );
+		
+		Calendar c = Calendar.getInstance(); 
+		c.setTime(d); 
+		c.add(Calendar.MONTH, 1);
+		d= new java.sql.Date(c.getTimeInMillis());
+		System.out.println("test "+c);
+		
+		b.setDate(d);
 		result.add(b);
 		return result;
 		
