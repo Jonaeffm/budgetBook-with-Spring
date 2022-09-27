@@ -3,6 +3,7 @@ package service;
 import java.sql.Date;
 import java.util.List;
 
+import domain.Budget;
 import domain.Income;
 
 public interface IIncomeService {
