@@ -5,6 +5,7 @@ package bootstrap;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +29,15 @@ public class BootStrapData implements CommandLineRunner{
 	
 	public ArrayList<Budget> periodic(Budget b){
 		ArrayList<Budget> result = new ArrayList<Budget>();
-		result.add(b);
+		//result.add(b);
 
-		
-		return null;
+		Date d = b.getDate();
+		LocalDate ld = d.toLocalDate();
+		LocalDate monthLater = ld.plusMonths( 1 );
+		java.sql.Date d2 = java.sql.Date.valueOf( monthLater );
+		b.setDate(d2);
+		result.add(b);
+		return result;
 		
 	}
     
@@ -54,7 +60,12 @@ public class BootStrapData implements CommandLineRunner{
 		iR.save(money);
 		System.out.print("Number of elements: "+bR2.count());
 		System.out.print("Number of incomes"+iR.count());
-
+		
+		ArrayList<Budget> test = new ArrayList<Budget>();
+		test = periodic(cigarettes);
+		System.out.println("Datum 1:"+cigarettes.getDate());
+		System.out.println("Datum 2:"+test.get(0).getDate());
+		
 		
 		
 		
