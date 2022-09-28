@@ -28,6 +28,32 @@ public class BootStrapData implements CommandLineRunner{
 	@Autowired
 	private IncomeRepository iR;
 	
+	public ArrayList<Income> periodic(Income b){
+		ArrayList<Income> result = new ArrayList<Income>();
+		result.add(b);
+
+		Date d = b.getInserted();
+		
+//		LocalDate ld = d.toLocalDate();
+//		LocalDate monthLater = ld.plusMonths( 1 );
+//		java.sql.Date d2 = java.sql.Date.valueOf( monthLater );
+		
+//		Calendar c = Calendar.getInstance(); 
+//		c.setTime(d); 
+//		c.add(Calendar.MONTH, 1);
+//		d= new java.sql.Date(c.getTimeInMillis());
+		for (int i=1;i<12;i++)
+		{
+			Date d2=Date.valueOf(d.toLocalDate().plusMonths(i));
+			Income b2 = new Income(d2,b.getDetail(),b.getAmount());
+		
+			result.add(b2);
+		}
+		return result;
+		
+	}
+    
+	
 	public ArrayList<Budget> periodic(Budget b){
 		ArrayList<Budget> result = new ArrayList<Budget>();
 		result.add(b);
@@ -80,8 +106,13 @@ public class BootStrapData implements CommandLineRunner{
 		{
 			System.out.println("Datum "+i+":"+test.get(i).getDate());
 		}
-		
-		
+		ArrayList<Income> test2;
+		test2=periodic(money);
+		System.out.println("Datum 1 Einkommen:"+money.getInserted());
+		for(int i=1;i<12;i++)
+		{
+			System.out.println("Datum "+i+":"+test2.get(i).getInserted());
+		}
 		
 		
 		
