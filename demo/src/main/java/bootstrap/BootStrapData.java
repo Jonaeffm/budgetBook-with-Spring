@@ -30,7 +30,7 @@ public class BootStrapData implements CommandLineRunner{
 	
 	public ArrayList<Budget> periodic(Budget b){
 		ArrayList<Budget> result = new ArrayList<Budget>();
-		//result.add(b);
+		result.add(b);
 
 		Date d = b.getDate();
 		
@@ -42,10 +42,13 @@ public class BootStrapData implements CommandLineRunner{
 //		c.setTime(d); 
 //		c.add(Calendar.MONTH, 1);
 //		d= new java.sql.Date(c.getTimeInMillis());
-		Date d2=Date.valueOf(d.toLocalDate().plusMonths(1));
-		Budget b2 = new Budget(d2,b.getProduct(),b.getPrice());
+		for (int i=1;i<12;i++)
+		{
+			Date d2=Date.valueOf(d.toLocalDate().plusMonths(i));
+			Budget b2 = new Budget(d2,b.getProduct(),b.getPrice());
 		
-		result.add(b2);
+			result.add(b2);
+		}
 		return result;
 		
 	}
@@ -73,7 +76,11 @@ public class BootStrapData implements CommandLineRunner{
 		ArrayList<Budget> test ;
 		test = periodic(cigarettes);
 		System.out.println("Datum 1:"+cigarettes.getDate());
-		System.out.println("Datum 2:"+test.get(0).getDate());
+		for(int i=1;i<12;i++)
+		{
+			System.out.println("Datum "+i+":"+test.get(i).getDate());
+		}
+		
 		
 		
 		
