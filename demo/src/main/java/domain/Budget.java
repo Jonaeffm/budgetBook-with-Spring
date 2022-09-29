@@ -15,12 +15,25 @@ public class Budget {
 	private Date date;
 	private String product;
 	private Double price;
+	private Boolean periodic;
+	
+
+	public Budget(Date d,String p, Double pr, Boolean pe)
+	{
+		setDate(d);
+		setProduct(p);
+		setPrice(pr);
+		setPeriodic(pe);
+		
+	}
 	
 	public Budget(Date d,String p, Double pr)
 	{
 		setDate(d);
 		setProduct(p);
 		setPrice(pr);
+		setPeriodic(false);
+		
 	}
 	
 	
@@ -100,6 +113,18 @@ public int compare(Budget b1, Budget b2) {
          else return 0;
 	}
 */
+
+
+
+	public Boolean getPeriodic() {
+		return periodic;
+	}
+
+
+
+	public void setPeriodic(Boolean periodic) {
+		this.periodic = periodic;
+	}
 
 /*
 @Override
