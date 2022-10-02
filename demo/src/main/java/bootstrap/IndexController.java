@@ -1,6 +1,7 @@
 package bootstrap;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -65,6 +66,31 @@ public class IndexController {
 	 * attributeName: "budgets",BudgetService.findAll()); }
 	 */
 
+	public ArrayList<Budget> periodic(Budget b){
+		ArrayList<Budget> result = new ArrayList<Budget>();
+		result.add(b);
+
+		Date d = b.getDate();
+		
+//		LocalDate ld = d.toLocalDate();
+//		LocalDate monthLater = ld.plusMonths( 1 );
+//		java.sql.Date d2 = java.sql.Date.valueOf( monthLater );
+		
+//		Calendar c = Calendar.getInstance(); 
+//		c.setTime(d); 
+//		c.add(Calendar.MONTH, 1);
+//		d= new java.sql.Date(c.getTimeInMillis());
+		for (int i=1;i<12;i++)
+		{
+			Date d2=Date.valueOf(d.toLocalDate().plusMonths(i));
+			Budget b2 = new Budget(d2,b.getProduct(),b.getPrice());
+		
+			result.add(b2);
+		}
+		return result;
+		
+	}
+	
 	@GetMapping("/budgets")
 	public String getBudgets(Model model) {
 		model.addAttribute("incomes", IncomeService.findAll());
@@ -96,7 +122,14 @@ public class IndexController {
 
 	@RequestMapping(value = "/addBudget", method = RequestMethod.POST)
 	public String processStudentInfo(@ModelAttribute("budgets") Budget budgetToAdd) {
-		BudgetService.addBudget(budgetToAdd);
+		if(budgetToAdd.getPeriodic())
+				{
+					ArrayList<Budget> toAdd = periodic(budgetToAdd);
+					for(int i=0;i<toAdd.size();i++)
+						BudgetService.addBudget(toAdd.get(i));
+				}
+		else
+			BudgetService.addBudget(budgetToAdd);
 		return "success";
 	}
 
