@@ -19,11 +19,20 @@ public class Income {
 	private Date inserted;
 	private String detail;
 	private Double amount;
+	private Boolean periodic;
 
+	public Income(Date d, String de, Double v,Boolean periodic) {
+		setInserted(d);
+		setDetail(de);
+		setAmount(v);
+		setPeriodic(periodic);
+	}
+	
 	public Income(Date d, String de, Double v) {
 		setInserted(d);
 		setDetail(de);
 		setAmount(v);
+		setPeriodic(false);
 	}
 
 }
