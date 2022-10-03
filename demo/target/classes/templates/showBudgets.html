@@ -24,6 +24,7 @@
                 <th>Detail</th>
                 <th>Value</th>
                 <th>Date</th>
+                 <th>Periodic</th>
                 <th>Delete</th>
             </tr>
 
@@ -34,6 +35,7 @@
                     <td th:text = "${income.detail}"></td>
                     <td th:text = "${income.amount}"></td>
                     <td th:text = "${income.inserted}"></td>
+                    <td th:text = "${income.periodic}"></td>
                     <td><a th:href="@{/deleteIncome/{id}(id=${income.id})}">Delete</a></td>
                 </tr>
                 
@@ -50,7 +52,7 @@
                 <th>Product</th>
                 <th>Price</th>
                 <th>Date</th>
-                <th>periodic</th>
+                <th>Periodic</th>
                 <th>Delete</th>
             </tr>
 
