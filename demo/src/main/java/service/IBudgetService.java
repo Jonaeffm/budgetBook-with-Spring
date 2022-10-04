@@ -13,6 +13,7 @@ public interface IBudgetService {
 	public List<Budget> findByDate(Date d);
 	public List<Budget> findByMonth(int month);
 	public List<Budget> findByDatePlusMonth(Date d);
+	public List<Budget> findByString(String s);
 }
 /*package com.zetcode.service;
 

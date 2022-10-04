@@ -74,6 +74,22 @@ public class BudgetService implements IBudgetService{
 		}
 		return temp;
 	}
+	public List<Budget> findByString(String s) {
+		List<Budget> temp = (List<Budget>) repository.findAll();
+		for(int i=temp.size()-1;i>-1;i--)
+		
+		{
+			
+			
+			
+			
+			
+			if(!temp.get(i).getProduct().contains(s))
+							temp.remove(i);
+		}
+		return temp;
+	}
+	
 }	
 	
 	
