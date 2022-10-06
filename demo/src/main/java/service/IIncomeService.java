@@ -3,6 +3,7 @@ package service;
 import java.sql.Date;
 import java.util.List;
 
+import domain.Budget;
 import domain.Income;
 
 public interface IIncomeService {
@@ -14,5 +15,5 @@ public interface IIncomeService {
 	public List<Income> findByDate(Date d);
 	public List<Income> findByMonth(int month);
 	public List<Income> findByDatePlusMonth(Date d);
-	
+	public List<Income> findByString(String s);
 }

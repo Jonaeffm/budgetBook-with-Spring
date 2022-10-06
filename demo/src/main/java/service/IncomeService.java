@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import domain.Budget;
 import domain.Income;
 import repositories.IncomeRepository;
 
@@ -82,4 +83,21 @@ LocalDate localDateD = d.toLocalDate();
 		return temp;
 	}
 
+	public List<Income> findByString(String s) {
+		List<Income> temp = (List<Income>) repository.findAll();
+		for(int i=temp.size()-1;i>-1;i--)
+		
+		{
+			
+			
+			
+			
+			
+			if(!temp.get(i).getDetail().contains(s))
+							temp.remove(i);
+		}
+		return temp;
+	}
+	
+	
 }
