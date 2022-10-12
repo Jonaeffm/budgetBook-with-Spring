@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import domain.Budget;
 import domain.Income;
 import domain.IntDate;
+import domain.searchString;
 import service.IBudgetService;
 import service.IIncomeService;
 
@@ -308,23 +309,23 @@ public class IndexController {
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String search(Model model) {
-		model.addAttribute("searchString", new String());
+		model.addAttribute("searchString", new searchString());
 		// model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
 		return "search";
 	}
 
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
-	public String search(Model model, @ModelAttribute("searchString") String result) {
+	public String search(Model model, @ModelAttribute("searchString") searchString result) {
 
 		// BudgetService.addBudget(budgetToAdd);
-		model.addAttribute("incomes", IncomeService.findByString(result));
-		model.addAttribute("budgets", BudgetService.findByString(result));
+		model.addAttribute("incomes", IncomeService.findByString(result.getSearchString()));
+		model.addAttribute("budgets", BudgetService.findByString(result.getSearchString()));
 		model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
 		model.addAttribute("byIncomeDate", Comparator.comparing(Income::getInserted));
 
 		double total = 0;
-		List<Budget> b = BudgetService.findByString(result);
-		List<Income> ic = IncomeService.findByString(result);
+		List<Budget> b = BudgetService.findByString(result.getSearchString());
+		List<Income> ic = IncomeService.findByString(result.getSearchString());
 		for (int i = 0; i < b.size(); i++) {
 
 			total = total - b.get(i).getPrice();
