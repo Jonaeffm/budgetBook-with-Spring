@@ -306,6 +306,42 @@ public class IndexController {
 
 	}
 
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String search(Model model) {
+		model.addAttribute("searchString", new String());
+		// model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+		return "search";
+	}
+
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public String search(Model model, @ModelAttribute("searchString") String result) {
+
+		// BudgetService.addBudget(budgetToAdd);
+		model.addAttribute("incomes", IncomeService.findByString(result));
+		model.addAttribute("budgets", BudgetService.findByString(result));
+		model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+		model.addAttribute("byIncomeDate", Comparator.comparing(Income::getInserted));
+
+		double total = 0;
+		List<Budget> b = BudgetService.findByString(result);
+		List<Income> ic = IncomeService.findByString(result);
+		for (int i = 0; i < b.size(); i++) {
+
+			total = total - b.get(i).getPrice();
+		}
+		for (int i = 0; i < ic.size(); i++) {
+			total = total + ic.get(i).getAmount();
+		}
+
+		// get the total of your list
+		model.addAttribute("total", total);
+
+		return "showBudgets";
+
+		// getBudgetsTest(model, budgetToAdd.getDate());
+
+	}
+	
 	@RequestMapping(value = "/addIncome", method = RequestMethod.GET)
 	public String showIncomeInfo(Model model) {
 		model.addAttribute("incomes", new Income());
