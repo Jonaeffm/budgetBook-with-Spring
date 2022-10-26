@@ -117,7 +117,7 @@ public class IndexController {
 		
 	}
 	
-	@GetMapping("/budgets")
+	@GetMapping({"/budgets","/"})
 	public String getBudgets(Model model) {
 		model.addAttribute("incomes", IncomeService.findAll());
 		model.addAttribute("budgets", BudgetService.findAll());
