@@ -117,6 +117,11 @@ public class IndexController {
 		
 	}
 	
+	@RequestMapping("/login")
+    public String login(Model model) {
+        return "login";
+    }
+	
 	@GetMapping({"/budgets","/"})
 	public String getBudgets(Model model) {
 		model.addAttribute("incomes", IncomeService.findAll());
