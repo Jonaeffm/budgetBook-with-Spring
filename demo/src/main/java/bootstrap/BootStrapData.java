@@ -15,7 +15,9 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Component;
 import domain.Budget;
 import domain.Income;
+import domain.User;
 import repositories.IncomeRepository;
+import repositories.UserRepository;
 import repositories.budgetRepository;
 
 @EnableAutoConfiguration
@@ -27,6 +29,8 @@ public class BootStrapData implements CommandLineRunner{
 	private budgetRepository bR2;
 	@Autowired
 	private IncomeRepository iR;
+	@Autowired
+	private UserRepository uR;
 	
 	public ArrayList<Income> periodic(Income b){
 		ArrayList<Income> result = new ArrayList<Income>();
@@ -91,6 +95,8 @@ public class BootStrapData implements CommandLineRunner{
 		java.util.Date utilDate = formatter.parse(str_date);
 		Date date = new Date(utilDate.getTime());
 
+		
+		
 		
 		Budget cigarettes = new Budget(date,"cigarettes",(double) 1000);
 		bR2.save(cigarettes);
