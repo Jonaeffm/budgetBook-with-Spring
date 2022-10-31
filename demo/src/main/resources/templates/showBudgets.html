@@ -7,12 +7,20 @@
         </head>
 
     <body>
+<form class="navbar-form navbar-right" th:action="@{/logout}" method="post">
+                            <input type="submit" class="btn btn-primary" value="Logout" />
+                        </form>
+                    <p class="navbar-text navbar-right" th:text="${currentUser}">
+                            example_user
+                        </p>
 
  <a href="/addBudget">add product</a>
   <a href="/addIncome">add income</a>
        <a href="/selectDate">filter by date</a>
        <a href="/budgets">all dates</a>
        <a href="/selectDatePlusMonth">month</a>
+       
+                        
 
 
         <h2>List of incomes</h2>
