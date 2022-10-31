@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class ProgramUser {
  
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue()
     private long id;
  
     @NotEmpty(message = "username is required")
