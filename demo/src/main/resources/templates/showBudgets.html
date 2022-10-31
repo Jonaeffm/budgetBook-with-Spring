@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
     <head>
         <title>Show budgets</title>
         <meta charset="UTF-8">
@@ -7,12 +7,16 @@
         </head>
 
     <body>
-<form class="navbar-form navbar-right" th:action="@{/logout}" method="post">
+
+
+				 
+				<div sec:authorize="isAuthenticated()">Authenticated as <span sec:authentication="name"></span></div>
+				<form class="navbar-form navbar-right" th:action="@{/logout}" method="post">
                             <input type="submit" class="btn btn-primary" value="Logout" />
                         </form>
-                    <p class="navbar-text navbar-right" th:text="${currentUser}">
-                            example_user
-                        </p>
+                    
+ 
+
 
  <a href="/addBudget">add product</a>
   <a href="/addIncome">add income</a>
