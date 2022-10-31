@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UserDetails;
  
 import java.util.Collection;
  
-public class AuthenticatedUser extends User implements UserDetails {
-    public AuthenticatedUser(User user) {
+public class AuthenticatedUser extends ProgramUser implements UserDetails {
+    public AuthenticatedUser(ProgramUser user) {
         super(user.getUsername(), user.getPassword());
     }
  

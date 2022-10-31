@@ -8,18 +8,20 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import domain.AuthenticatedUser;
-import domain.User;
-import repositories.UserRepository;
+import domain.ProgramUser;
+
+import repositories.ProgramUserRepository;
+
  
 @Service
 public class AuthenticatedUserService implements UserDetailsService {
  
     @Autowired
-    private UserRepository userRepository;
+    private ProgramUserRepository userRepository;
  
     @Override
     public UserDetails loadUserByUsername(String username) {
-        User user = userRepository.findByUsername(username);
+        ProgramUser user = userRepository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("The user " + username + " does not exist");
         }
