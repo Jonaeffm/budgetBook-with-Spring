@@ -1,18 +1,28 @@
 package domain;
 
+
+
+
+
+
 import org.hibernate.validator.constraints.NotEmpty;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.*;
+
  
 @Entity
 public class ProgramUser {
@@ -28,12 +38,12 @@ public class ProgramUser {
     @NotEmpty(message = "password is required")
     private String password;
  
-    @OneToMany(targetEntity= Budget.class)
+    @OneToMany(targetEntity= Budget.class, cascade= {CascadeType.ALL})
     @JoinColumn(name="user_budget",referencedColumnName = "id")
     private List<Budget> budgets;
     
 
-    @OneToMany(targetEntity= Income.class)
+    @OneToMany(targetEntity= Income.class,cascade= {CascadeType.ALL})
     @JoinColumn(name="user_income",referencedColumnName = "id")
     private List<Income> incomes;
     
@@ -43,10 +53,10 @@ public class ProgramUser {
         this.username = userName;
         this.password = password;
         
-        List<Budget> budgetSet =new ArrayList<Budget>();
+        /*List<Budget> budgetSet =new ArrayList<Budget>();
         this.setBudgets(budgetSet);
         List<Income> incomeSet = new ArrayList<Income>();
-        this.setIncomes(incomeSet);
+        this.setIncomes(incomeSet);*/
     }
  
     public String getUsername() {

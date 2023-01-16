@@ -106,8 +106,7 @@ public class BootStrapData implements CommandLineRunner{
 		System.out.print("Number of elements: "+bR2.count());
 		System.out.print("Number of incomes"+iR.count());
 		
-		ProgramUser a = new ProgramUser("a","a");
-		uR.save(a);
+		
 		
 		ArrayList<Budget> test ;
 		test = periodic(cigarettes);
@@ -123,11 +122,13 @@ public class BootStrapData implements CommandLineRunner{
 		{
 			System.out.println("Datum "+i+":"+test2.get(i).getInserted());
 		}
+		ProgramUser a = new ProgramUser("a","a");
 		
 		a.setBudgets(test);		
 		a.setIncomes(test2);
+		uR.save(a);
 		
-		
+
 	
 	}
 
