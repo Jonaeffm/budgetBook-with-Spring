@@ -2,6 +2,7 @@ package domain;
 
 import java.sql.Date;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,8 +23,8 @@ public class Income {
 	private Double amount;
 	private Boolean periodic;
 
-	/*@ManyToOne
-	private ProgramUser user;*/
+@ManyToOne()
+	private ProgramUser user;
 	
 	public Income(Date d, String de, Double v,Boolean periodic) {
 		setInserted(d);
