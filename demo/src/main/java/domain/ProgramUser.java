@@ -7,7 +7,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -28,12 +30,12 @@ public class ProgramUser {
  
     @OneToMany(targetEntity= Budget.class)
     @JoinColumn(name="user_budget",referencedColumnName = "id")
-    private Set<Budget> budgets;
+    private List<Budget> budgets;
     
 
     @OneToMany(targetEntity= Income.class)
     @JoinColumn(name="user_income",referencedColumnName = "id")
-    private Set<Income> incomes;
+    private List<Income> incomes;
     
     protected ProgramUser() {}
  
@@ -41,9 +43,9 @@ public class ProgramUser {
         this.username = userName;
         this.password = password;
         
-        Set<Budget> budgetSet =new HashSet<Budget>();
+        List<Budget> budgetSet =new ArrayList<Budget>();
         this.setBudgets(budgetSet);
-        Set<Income> incomeSet = new HashSet<Income>();
+        List<Income> incomeSet = new ArrayList<Income>();
         this.setIncomes(incomeSet);
     }
  
@@ -63,20 +65,20 @@ public class ProgramUser {
         this.password = password;
     }
     
-    public void setBudgets(Set<Budget> budgets)
+    public void setBudgets(List<Budget> budgets)
     {
     this.budgets=budgets;	
     }
     
-    public Set<Budget> getBudgets()
+    public List<Budget> getBudgets()
     {
     	return this.budgets;
     }
     
-    public void setIncomes(Set<Income> incomes) {
+    public void setIncomes(List<Income> incomes) {
     this.incomes=incomes;}
     
-    public Set<Income> getIncomes()
+    public List<Income> getIncomes()
 
 {return this.incomes;
     	}
