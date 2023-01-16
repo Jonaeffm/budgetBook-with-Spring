@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -21,11 +22,15 @@ public class Income {
 	private Double amount;
 	private Boolean periodic;
 
+	/*@ManyToOne
+	private ProgramUser user;*/
+	
 	public Income(Date d, String de, Double v,Boolean periodic) {
 		setInserted(d);
 		setDetail(de);
 		setAmount(v);
 		setPeriodic(periodic);
+		//setUser(null);
 	}
 	
 	public Income(Date d, String de, Double v) {
@@ -33,6 +38,7 @@ public class Income {
 		setDetail(de);
 		setAmount(v);
 		setPeriodic(false);
+		//setUser(null);
 	}
 
 }

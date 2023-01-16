@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 
 @Entity
@@ -17,6 +18,9 @@ public class Budget {
 	private Double price;
 	private Boolean periodic;
 	
+	/*@ManyToOne
+	private ProgramUser user;*/
+	
 
 	public Budget(Date d,String p, Double pr, Boolean pe)
 	{
@@ -25,6 +29,7 @@ public class Budget {
 		setPrice(pr);
 		setPeriodic(pe);
 		
+		//setUser(null);
 	}
 	
 	public Budget(Date d,String p, Double pr)
@@ -33,6 +38,7 @@ public class Budget {
 		setProduct(p);
 		setPrice(pr);
 		setPeriodic(false);
+		//setUser(null);
 		
 	}
 	
@@ -114,8 +120,16 @@ public int compare(Budget b1, Budget b2) {
 	}
 */
 
-
-
+	/*public ProgramUser getUser()
+	{
+		return user; 
+	}
+	
+	public void setUser(ProgramUser user)
+	{
+		this.user = user;
+	}*/
+	
 	public Boolean getPeriodic() {
 		return periodic;
 	}
