@@ -100,9 +100,9 @@ public class BootStrapData implements CommandLineRunner{
 		
 		
 		Budget cigarettes = new Budget(date,"cigarettes",(double) 1000);
-	
+		bR2.save(cigarettes);
 		Income money = new Income(date,"gift",(double) 10000);
-		
+		iR.save(money);
 		System.out.print("Number of elements: "+bR2.count());
 		System.out.print("Number of incomes"+iR.count());
 		
@@ -124,16 +124,10 @@ public class BootStrapData implements CommandLineRunner{
 		}
 		ProgramUser a = new ProgramUser("a","a");
 		
-		cigarettes.setUser(a);
-		
-		money.setUser(a);
-		
-		a.getBudgets().add(cigarettes);		
-		a.getIncomes().add(money);
-		
+		a.setBudgets(test);		
+		a.setIncomes(test2);
 		uR.save(a);
-		iR.save(money);
-		bR2.save(cigarettes);
+		
 
 	
 	}

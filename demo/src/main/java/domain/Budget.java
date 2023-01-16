@@ -1,8 +1,6 @@
 package domain;
 
 import java.sql.Date;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,8 +18,8 @@ public class Budget {
 	private Double price;
 	private Boolean periodic;
 	
-	@ManyToOne()
-	private ProgramUser user;
+	/*@ManyToOne
+	private ProgramUser user;*/
 	
 
 	public Budget(Date d,String p, Double pr, Boolean pe)
@@ -122,7 +120,7 @@ public int compare(Budget b1, Budget b2) {
 	}
 */
 
-	public ProgramUser getUser()
+	/*public ProgramUser getUser()
 	{
 		return user; 
 	}
@@ -130,7 +128,7 @@ public int compare(Budget b1, Budget b2) {
 	public void setUser(ProgramUser user)
 	{
 		this.user = user;
-	}
+	}*/
 	
 	public Boolean getPeriodic() {
 		return periodic;
