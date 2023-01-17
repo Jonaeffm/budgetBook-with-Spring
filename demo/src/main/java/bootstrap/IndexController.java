@@ -21,7 +21,10 @@ import org.springframework.web.servlet.ModelAndView;
 import domain.Budget;
 import domain.Income;
 import domain.IntDate;
+import domain.ProgramUser;
 import domain.searchString;
+import repositories.ProgramUserRepository;
+import service.AuthenticatedUserService;
 import service.IBudgetService;
 import service.IIncomeService;
 
@@ -34,6 +37,9 @@ public class IndexController {
 	 * 
 	 * }
 	 */
+	
+	@Autowired
+	private ProgramUserRepository userRepository;
 
 	@Autowired
 	private IBudgetService BudgetService;
@@ -161,14 +167,34 @@ public class IndexController {
 
 	@RequestMapping(value = "/addBudget", method = RequestMethod.POST)
 	public String processStudentInfo(@ModelAttribute("budgets") Budget budgetToAdd) {
+		
+		//Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		
+		//ProgramUser aut = userRepository.findByUsername(authentication.getName());
+		
 		if(budgetToAdd.getPeriodic())
 				{
 					ArrayList<Budget> toAdd = periodic(budgetToAdd);
-					for(int i=0;i<toAdd.size();i++)
-						BudgetService.addBudget(toAdd.get(i));
+					for(int i=0;i<toAdd.size();i++) {
+						
+						
+						//aut.getBudgets().add(toAdd.get(i));	
+						
+						//toAdd.get(i).setUser(userRepository.findByUsername(authentication.getName()));
+						//userRepository.save(aut);
+						BudgetService.addBudget(toAdd.get(i));}
 				}
-		else
-			BudgetService.addBudget(budgetToAdd);
+		else {
+			//budgetToAdd.setUser(userRepository.findByUsername(authentication.getName()));
+		//aut.getBudgets().add(budgetToAdd);	
+		
+		
+		//userRepository.save(aut);
+			
+			//BudgetService.addBudget(budgetToAdd);
+			}
+	
 		return "success";
 	}
 
