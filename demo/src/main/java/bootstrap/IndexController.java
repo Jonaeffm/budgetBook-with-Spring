@@ -398,16 +398,28 @@ public class IndexController {
 
 	@RequestMapping(value = "/addIncome", method = RequestMethod.POST)
 	public String processIncomeInfo(@ModelAttribute("incomes") Income incomeToAdd) {
+Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
+		
+		ProgramUser aut = userRepository.findByUsername(authentication.getName());
 		if(incomeToAdd.getPeriodic())
 		{
 			ArrayList<Income> toAdd = periodic(incomeToAdd);
-			for(int i=0;i<toAdd.size();i++)
-				IncomeService.addIncome(toAdd.get(i));
+			for(int i=0;i<toAdd.size();i++) {
+				//IncomeService.addIncome(toAdd.get(i));
+			aut.getIncomes().add(toAdd.get(i));	
+			
+			toAdd.get(i).setUser(userRepository.findByUsername(authentication.getName()));
+			userRepository.save(aut);}
+			//____________________________________________________________
 		}
 else
-	IncomeService.addIncome(incomeToAdd);
-		
+	incomeToAdd.setUser(aut);
+aut.getIncomes().add(incomeToAdd);	
+
+
+userRepository.save(aut);
+	
 		
 		return "success";
 	}

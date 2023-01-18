@@ -6,11 +6,15 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import domain.Budget;
 import domain.Income;
+import domain.ProgramUser;
 import repositories.IncomeRepository;
+import repositories.ProgramUserRepository;
 
 @Service
 public class IncomeService implements IIncomeService{
@@ -18,12 +22,28 @@ public class IncomeService implements IIncomeService{
 	@Autowired
 	private IncomeRepository repository;
 	
+	
+	@Autowired
+	private ProgramUserRepository userRepository;
+	
 	@Override
-	public List<Income> findAll() {
-		// TODO Auto-generated method stub
-		return (List<Income>) repository.findAll();
+	public List<Income> findAll(){
+	List<Income> IncList = (List<Income>) repository.findAll();
+	
+	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	
+	
+	ProgramUser aut = userRepository.findByUsername(authentication.getName());
+	
+	for (int i=0;i<IncList.size();i++)
+	{
+		if(IncList.get(i).getUser() != aut)
+		{
+			IncList.remove(i);
+		}
 	}
 
+	return IncList;}
 	@Override
 	public void addIncome(Income i) {
 		// TODO Auto-generated method stub
@@ -44,6 +64,19 @@ public class IncomeService implements IIncomeService{
 			if(temp.get(i).getInserted().compareTo(d) != 0)
 							temp.remove(i);
 		}
+
+Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		
+		ProgramUser aut = userRepository.findByUsername(authentication.getName());
+		for (int i=0;i<temp.size();i++)
+		{
+			if(temp.get(i).getUser() != aut)
+			{
+				temp.remove(i);
+			}
+		}
+		
 		return temp;
 	}
 
@@ -63,6 +96,17 @@ public class IncomeService implements IIncomeService{
 			if(month != month2)
 							temp.remove(i);
 		}
+Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		
+		ProgramUser aut = userRepository.findByUsername(authentication.getName());
+		for (int i=0;i<temp.size();i++)
+		{
+			if(temp.get(i).getUser() != aut)
+			{
+				temp.remove(i);
+			}
+		}
 		return temp;
 	}
 
@@ -80,6 +124,17 @@ LocalDate localDateD = d.toLocalDate();
 			if(!((((localDateTemp.getMonthValue()==localDateD.getMonthValue())&&(localDateTemp.getDayOfMonth()>=localDateD.getDayOfMonth())&&(localDateD.getYear()==localDateTemp.getYear()))||((localDateTemp.getMonthValue()==localDateD.getMonthValue()+1)&&(localDateTemp.getDayOfMonth()<localDateD.getDayOfMonth())&&(localDateD.getYear()==localDateTemp.getYear())))||((localDateD.getMonthValue()==12)&&(localDateTemp.getMonthValue()==1)&&(localDateTemp.getDayOfMonth()<localDateD.getDayOfMonth())&&(localDateD.getYear()+1==localDateTemp.getYear()))))
 									temp.remove(i);
 		}
+Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		
+		ProgramUser aut = userRepository.findByUsername(authentication.getName());
+		for (int i=0;i<temp.size();i++)
+		{
+			if(temp.get(i).getUser() != aut)
+			{
+				temp.remove(i);
+			}
+		}
 		return temp;
 	}
 
@@ -95,6 +150,17 @@ LocalDate localDateD = d.toLocalDate();
 			
 			if(!temp.get(i).getDetail().contains(s))
 							temp.remove(i);
+		}
+Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		
+		ProgramUser aut = userRepository.findByUsername(authentication.getName());
+		for (int i=0;i<temp.size();i++)
+		{
+			if(temp.get(i).getUser() != aut)
+			{
+				temp.remove(i);
+			}
 		}
 		return temp;
 	}
