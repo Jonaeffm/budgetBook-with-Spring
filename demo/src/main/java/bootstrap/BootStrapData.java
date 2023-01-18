@@ -123,15 +123,16 @@ public class BootStrapData implements CommandLineRunner{
 			System.out.println("Datum "+i+":"+test2.get(i).getInserted());
 		}
 		ProgramUser a = new ProgramUser("a","a");
-		
-		cigarettes.setUser(a);
+		ProgramUser b = new ProgramUser("b","b");
+		cigarettes.setUser(b);
 		
 		money.setUser(a);
 		
-		a.getBudgets().add(cigarettes);		
+		b.getBudgets().add(cigarettes);		
 		a.getIncomes().add(money);
 		
 		uR.save(a);
+		uR.save(b);
 		iR.save(money);
 		bR2.save(cigarettes);
 

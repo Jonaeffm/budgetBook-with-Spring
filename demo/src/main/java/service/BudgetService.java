@@ -5,9 +5,13 @@ import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import domain.Budget;
+import domain.ProgramUser;
+import repositories.ProgramUserRepository;
 import repositories.budgetRepository;
 
 @Service
@@ -15,10 +19,28 @@ public class BudgetService implements IBudgetService{
 
 	@Autowired
 	private budgetRepository repository;
+	
+	@Autowired
+	private ProgramUserRepository userRepository;
 
 	@Override
 	public List<Budget> findAll(){
-		return (List<Budget>) repository.findAll();
+		
+		List<Budget> budList = (List<Budget>) repository.findAll();
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		
+		ProgramUser aut = userRepository.findByUsername(authentication.getName());
+		for (int i=0;i<budList.size();i++)
+		{
+			if(budList.get(i).getUser() != aut)
+			{
+				budList.remove(i);
+			}
+		}
+	
+		return budList;
 	}
 	
 	public List<Budget> findByDate(Date d){
