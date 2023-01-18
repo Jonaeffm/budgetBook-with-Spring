@@ -31,8 +31,19 @@ public class Budget {
 		setPrice(pr);
 		setPeriodic(pe);
 		
-		setUser(null);
+		//setUser(null);
 	}
+	
+	public Budget(Date d,String p, Double pr, Boolean pe,ProgramUser us)
+	{
+		setDate(d);
+		setProduct(p);
+		setPrice(pr);
+		setPeriodic(pe);
+		
+		setUser(us);
+	}
+	
 	
 	public Budget(Date d,String p, Double pr)
 	{
@@ -40,7 +51,7 @@ public class Budget {
 		setProduct(p);
 		setPrice(pr);
 		setPeriodic(false);
-		setUser(null);
+		//setUser(null);
 		
 	}
 	

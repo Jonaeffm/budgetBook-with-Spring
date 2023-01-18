@@ -14,8 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Budget;
@@ -160,18 +162,26 @@ public class IndexController {
 
 	@RequestMapping(value = "/addBudget", method = RequestMethod.GET)
 	public String showStudentInfo(Model model) {
-		model.addAttribute("budgets", new Budget());
+		
+		Budget b = new Budget();
+		//Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		//ProgramUser aut = userRepository.findByUsername(authentication.getName());
+		//b.setUser(aut);
+	
+		model.addAttribute("budgets",b );
+		
 		// model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
 		return "insert";
 	}
 
 	@RequestMapping(value = "/addBudget", method = RequestMethod.POST)
+	 
 	public String processStudentInfo(@ModelAttribute("budgets") Budget budgetToAdd) {
+		/*
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
-		//Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
-		
-		//ProgramUser aut = userRepository.findByUsername(authentication.getName());
+		ProgramUser aut = userRepository.findByUsername(authentication.getName());
 		
 		if(budgetToAdd.getPeriodic())
 				{
@@ -179,22 +189,22 @@ public class IndexController {
 					for(int i=0;i<toAdd.size();i++) {
 						
 						
-						//aut.getBudgets().add(toAdd.get(i));	
+						aut.getBudgets().add(toAdd.get(i));	
 						
-						//toAdd.get(i).setUser(userRepository.findByUsername(authentication.getName()));
-						//userRepository.save(aut);
+						toAdd.get(i).setUser(userRepository.findByUsername(authentication.getName()));
+						userRepository.save(aut);
 						BudgetService.addBudget(toAdd.get(i));}
 				}
 		else {
-			//budgetToAdd.setUser(userRepository.findByUsername(authentication.getName()));
-		//aut.getBudgets().add(budgetToAdd);	
+			budgetToAdd.setUser(userRepository.findByUsername(authentication.getName()));
+		aut.getBudgets().add(budgetToAdd);	
 		
 		
-		//userRepository.save(aut);
+		userRepository.save(aut);
 			
-			//BudgetService.addBudget(budgetToAdd);
+			BudgetService.addBudget(budgetToAdd);
 			}
-	
+	*/
 		return "success";
 	}
 
