@@ -50,6 +50,19 @@ public class BudgetService implements IBudgetService{
 			if(temp.get(i).getDate().compareTo(d) != 0)
 							temp.remove(i);
 		}
+		
+Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		
+		ProgramUser aut = userRepository.findByUsername(authentication.getName());
+		for (int i=0;i<temp.size();i++)
+		{
+			if(temp.get(i).getUser() != aut)
+			{
+				temp.remove(i);
+			}
+		}
+		
 		return temp;
 	}
 	
@@ -68,6 +81,19 @@ public class BudgetService implements IBudgetService{
 			if(month != month2)
 							temp.remove(i);
 		}
+		
+Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		
+		ProgramUser aut = userRepository.findByUsername(authentication.getName());
+		for (int i=0;i<temp.size();i++)
+		{
+			if(temp.get(i).getUser() != aut)
+			{
+				temp.remove(i);
+			}
+		}
+		
 		return temp;
 	}
 	
@@ -94,6 +120,19 @@ public class BudgetService implements IBudgetService{
 			if(!((((localDateTemp.getMonthValue()==localDateD.getMonthValue())&&(localDateTemp.getDayOfMonth()>=localDateD.getDayOfMonth())&&(localDateD.getYear()==localDateTemp.getYear()))||((localDateTemp.getMonthValue()==localDateD.getMonthValue()+1)&&(localDateTemp.getDayOfMonth()<localDateD.getDayOfMonth())&&(localDateD.getYear()==localDateTemp.getYear())))||((localDateD.getMonthValue()==12)&&(localDateTemp.getMonthValue()==1)&&(localDateTemp.getDayOfMonth()<localDateD.getDayOfMonth())&&(localDateD.getYear()+1==localDateTemp.getYear()))))
 									temp.remove(i);
 		}
+		
+Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		
+		ProgramUser aut = userRepository.findByUsername(authentication.getName());
+		for (int i=0;i<temp.size();i++)
+		{
+			if(temp.get(i).getUser() != aut)
+			{
+				temp.remove(i);
+			}
+		}
+		
 		return temp;
 	}
 	public List<Budget> findByString(String s) {
@@ -109,6 +148,18 @@ public class BudgetService implements IBudgetService{
 			if(!temp.get(i).getProduct().contains(s))
 							temp.remove(i);
 		}
+Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		
+		ProgramUser aut = userRepository.findByUsername(authentication.getName());
+		for (int i=0;i<temp.size();i++)
+		{
+			if(temp.get(i).getUser() != aut)
+			{
+				temp.remove(i);
+			}
+		}
+		
 		return temp;
 	}
 	

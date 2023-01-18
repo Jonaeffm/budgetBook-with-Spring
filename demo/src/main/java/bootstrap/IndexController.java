@@ -190,8 +190,8 @@ public class IndexController {
 						
 						toAdd.get(i).setUser(userRepository.findByUsername(authentication.getName()));
 						userRepository.save(aut);
-						BudgetService.addBudget(toAdd.get(i));}
-				}
+						
+				}}
 		else {
 			budgetToAdd.setUser(aut);
 		aut.getBudgets().add(budgetToAdd);	
