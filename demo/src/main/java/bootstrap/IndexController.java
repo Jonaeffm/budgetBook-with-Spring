@@ -164,10 +164,7 @@ public class IndexController {
 	public String showStudentInfo(Model model) {
 		
 		Budget b = new Budget();
-		//Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		//ProgramUser aut = userRepository.findByUsername(authentication.getName());
-		//b.setUser(aut);
-	
+		
 		model.addAttribute("budgets",b );
 		
 		// model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
@@ -177,7 +174,7 @@ public class IndexController {
 	@RequestMapping(value = "/addBudget", method = RequestMethod.POST)
 	 
 	public String processStudentInfo(@ModelAttribute("budgets") Budget budgetToAdd) {
-		/*
+		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
 		
@@ -196,15 +193,15 @@ public class IndexController {
 						BudgetService.addBudget(toAdd.get(i));}
 				}
 		else {
-			budgetToAdd.setUser(userRepository.findByUsername(authentication.getName()));
+			budgetToAdd.setUser(aut);
 		aut.getBudgets().add(budgetToAdd);	
 		
 		
 		userRepository.save(aut);
 			
-			BudgetService.addBudget(budgetToAdd);
+			//BudgetService.addBudget(budgetToAdd);
 			}
-	*/
+	
 		return "success";
 	}
 
