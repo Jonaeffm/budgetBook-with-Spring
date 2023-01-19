@@ -50,7 +50,7 @@ public class ProgramUser {
     @JoinColumn(name="user_income",referencedColumnName = "USER_ID")
     private Collection<Income> incomes;
     
-    protected ProgramUser() {}
+    public ProgramUser() {}
  
     public ProgramUser(String userName, String password) {
         this.username = userName;

@@ -423,6 +423,34 @@ userRepository.save(aut);
 		
 		return "success";
 	}
+	
+	@RequestMapping(value = "/addUser", method = RequestMethod.GET)
+	public String showUserInfo(Model model) {
+		
+		ProgramUser b = new ProgramUser();
+		
+		model.addAttribute("users",b );
+		
+		// model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+		return "newUser";
+	}
+
+	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
+	 
+	public String processUserInfo(@ModelAttribute("users") ProgramUser userToAdd) {
+		
+		
+			
+		
+		
+		userRepository.save(userToAdd);
+			
+			//BudgetService.addBudget(budgetToAdd);
+			
+	
+		return "success";
+	}
+
 
 }
 

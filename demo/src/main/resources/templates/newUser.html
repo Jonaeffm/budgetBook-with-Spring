@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+  
+   <form method="post" th:object="${users}">
+
+<label for="user.username">name</label> 
+<input type="text" class="form-control" id="product"  th:field="*{username}" placeholder="Enter product" />                  
+                        
+                        <label for="password">password</label> 
+                        <input type="text" class="form-control" id="price" th:field="*{password}"/>
+                        
+                    
+                         
+<!--    <button type="submit" class="btn btn-primary">Sign in</button> -->
+
+<input type="submit" value="Submit" class="btn btn-primary" />
+</body>
+
+
+</html>
