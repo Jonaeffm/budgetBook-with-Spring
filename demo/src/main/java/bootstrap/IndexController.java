@@ -120,7 +120,7 @@ public class IndexController {
 		for (int i=1;i<12;i++)
 		{
 			Date d2=Date.valueOf(d.toLocalDate().plusMonths(i));
-			Budget b2 = new Budget(d2,b.getProduct(),b.getPrice());
+			Budget b2 = new Budget(d2,b.getProduct(),b.getCategory(),b.getPrice());
 		
 			result.add(b2);
 		}

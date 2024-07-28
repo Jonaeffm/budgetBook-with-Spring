@@ -17,6 +17,7 @@ public class Budget {
  private long id;
 	private Date date;
 	private String product;
+	private String category;
 	private Double price;
 	private Boolean periodic;
 	
@@ -24,31 +25,33 @@ public class Budget {
 	private ProgramUser user;
 	
 
-	public Budget(Date d,String p, Double pr, Boolean pe)
+	public Budget(Date d,String p,String c, Double pr, Boolean pe)
 	{
 		setDate(d);
 		setProduct(p);
 		setPrice(pr);
 		setPeriodic(pe);
+		setCategory(c);
 		
 		//setUser(null);
 	}
 	
-	public Budget(Date d,String p, Double pr, Boolean pe,ProgramUser us)
+	public Budget(Date d,String p,String c, Double pr, Boolean pe,ProgramUser us)
 	{
 		setDate(d);
 		setProduct(p);
 		setPrice(pr);
 		setPeriodic(pe);
-		
+		setCategory(c);
 		setUser(us);
 	}
 	
 	
-	public Budget(Date d,String p, Double pr)
+	public Budget(Date d,String p, String c, Double pr)
 	{
 		setDate(d);
 		setProduct(p);
+		setCategory(c);
 		setPrice(pr);
 		setPeriodic(false);
 		//setUser(null);
@@ -62,6 +65,14 @@ public class Budget {
 		
 	}
 
+	public String getCategory() {
+		return category;
+	}
+	
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	
 	public Date getDate() {
 		return date;
 	}
