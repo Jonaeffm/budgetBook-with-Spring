@@ -8,21 +8,23 @@
   
    <form method="post" th:object="${budgets}">
 
-<label for="budget.product">product</label> 
-<input type="text" class="form-control" id="product"  th:field="*{product}" placeholder="Enter product" />                  
-                        <label for="price">price</label> 
-                        <input type="text" class="form-control" id="price" th:field="*{price}"/>
-                        
-                        <label for="price">date</label> 
-                        <input type="text" class="form-control" id="date" th:field="*{date}"/>
-                      <label for="periodic">periodic</label> 
-                        
-                        <input type="checkbox" id="periodic" th:field="*{periodic}" />  
-                        
-                         
-<!--    <button type="submit" class="btn btn-primary">Sign in</button> -->
+		<label for="budget.product">product</label> 
+		<input type="text" class="form-control" id="product"  th:field="*{product}" placeholder="Enter product" />      
 
-<input type="submit" value="Submit" class="btn btn-primary" />
+		<label for="budget.product">category</label> 
+		<input type="text" class="form-control" id="category"  th:field="*{category}" placeholder="Enter product" />                  
+                        
+      	<label for="price">price</label> 
+        <input type="text" class="form-control" id="price" th:field="*{price}"/>
+                        
+        <label for="price">date</label> 
+        <input type="text" class="form-control" id="date" th:field="*{date}"/>
+                      
+        <label for="periodic">periodic</label> 
+        <input type="checkbox" id="periodic" th:field="*{periodic}" />  
+                                                 
+<!--    <button type="submit" class="btn btn-primary">Sign in</button> -->
+		<input type="submit" value="Submit" class="btn btn-primary" />
 </body>
 
 

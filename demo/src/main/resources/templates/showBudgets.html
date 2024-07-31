@@ -63,6 +63,7 @@
             <tr>
                 <th>Id</th>
                 <th>Product</th>
+                <th>Category</th>
                 <th>Price</th>
                 <th>Date</th>
                 <th>Periodic</th>
@@ -74,6 +75,7 @@
                 <tr th:each="budget, stat : ${#lists.sort(budgets,byDate)}">
                     <td th:text = "${budget.id}"></td>
                     <td th:text = "${budget.product}"></td>
+                    <td th:text = "${budget.category}"></td>
                     <td th:text = "${budget.price}"></td>
                     <td th:text = "${budget.date}"></td>
                     <td th:text = "${budget.periodic}"></td>
