@@ -439,15 +439,10 @@ public class IndexController {
 	 
 	public String processUserInfo(@ModelAttribute("users") ProgramUser userToAdd) {
 		
-		
-			
-		
-		
 		userRepository.save(userToAdd);
 			
 			//BudgetService.addBudget(budgetToAdd);
 			
-	
 		return "success";
 	}
 
