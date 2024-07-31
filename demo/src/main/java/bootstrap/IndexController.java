@@ -194,10 +194,9 @@ public class IndexController {
 				}}
 		else {
 			budgetToAdd.setUser(aut);
-		aut.getBudgets().add(budgetToAdd);	
+			aut.getBudgets().add(budgetToAdd);	
 		
-		
-		userRepository.save(aut);
+			userRepository.save(aut);
 			
 			//BudgetService.addBudget(budgetToAdd);
 			}
@@ -398,7 +397,7 @@ public class IndexController {
 
 	@RequestMapping(value = "/addIncome", method = RequestMethod.POST)
 	public String processIncomeInfo(@ModelAttribute("incomes") Income incomeToAdd) {
-Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
 		
 		ProgramUser aut = userRepository.findByUsername(authentication.getName());
@@ -413,15 +412,16 @@ Authentication authentication = SecurityContextHolder.getContext().getAuthentica
 			userRepository.save(aut);}
 			//____________________________________________________________
 		}
-else
-	incomeToAdd.setUser(aut);
-aut.getIncomes().add(incomeToAdd);	
+		else
+		{
+			incomeToAdd.setUser(aut);
+			aut.getIncomes().add(incomeToAdd);	
 
-
-userRepository.save(aut);
-	
+			userRepository.save(aut);
 		
+		}
 		return "success";
+	
 	}
 	
 	@RequestMapping(value = "/addUser", method = RequestMethod.GET)
