@@ -4,7 +4,16 @@
         <title>Show budgets</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        </head>
+        
+        <script layout:fragment="script" th:inline="javascript">
+
+        function sortByCategory()
+        {
+        	document.getElementById('prodTable').innerHTML = "<table><tr><th>Id</th><th>Product</th><th>Category</th><th>Price</th><th>Date</th><th>Periodic</th><th>Delete</th></tr><tr th:each='budget, stat : ${#lists.sort(budgets,byCategory)}'><td th:text = '${budget.id}'></td><td th:text = '${budget.product}'></td><td th:text = '${budget.category}'></td><td th:text = '${budget.price}'></td><td th:text = '${budget.date}'></td><td th:text = '${budget.periodic}'></td><td><a th:href='@{/delete/{id}(id=${budget.id})}'>Delete</a></td></tr></table>"
+        }
+        
+		</script>
+    </head>
 
     	<body>
 			<div sec:authorize="isAuthenticated()">Authenticated as <span sec:authentication="name"></span></div>
@@ -42,11 +51,12 @@
 
         		<h2>List of products</h2>
 
-        		<table>
+				<div id="prodTable">
+        		<table >
             	<tr>
                 	<th>Id</th>
                 	<th>Product</th>
-                	<th>Category</th>
+                	<th ><button th:onclick="sortByCategory()">Category </button></th>
                 	<th>Price</th>
                 	<th>Date</th>
                 	<th>Periodic</th>
@@ -62,6 +72,7 @@
                     <td><a th:href="@{/delete/{id}(id=${budget.id})}">Delete</a></td>
                 </tr>
         	</table>
+        	</div>
          	<h2>sum </h2>
           	<span th:text="${total}">Total will go here</span>
     </body>
