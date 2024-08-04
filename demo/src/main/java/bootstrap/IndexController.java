@@ -144,6 +144,7 @@ public class IndexController {
 		model.addAttribute("budgets", BudgetService.findAll());
 		model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
 		model.addAttribute("byIncomeDate", Comparator.comparing(Income::getInserted));
+		model.addAttribute("byCategory", Comparator.comparing(Budget::getCategory));
 
 		double total = 0;
 		List<Budget> b = BudgetService.findAll();

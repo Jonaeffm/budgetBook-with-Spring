@@ -6,72 +6,52 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         </head>
 
-    <body>
-
-
-				 
-				<div sec:authorize="isAuthenticated()">Authenticated as <span sec:authentication="name"></span></div>
+    	<body>
+			<div sec:authorize="isAuthenticated()">Authenticated as <span sec:authentication="name"></span></div>
 				<form class="navbar-form navbar-right" th:action="@{/logout}" method="post">
-                            <input type="submit" class="btn btn-primary" value="Logout" />
-                        </form>
+                	<input type="submit" class="btn btn-primary" value="Logout" />
+                 </form>
                     
- 
-
-
- <a href="/addBudget">add product</a>
-  <a href="/addIncome">add income</a>
-       <a href="/selectDate">filter by date</a>
-       <a href="/budgets">all dates</a>
-       <a href="/selectDatePlusMonth">month</a>
-       <a href="/search">search</a>
+				<a href="/addBudget">add product</a>
+  				<a href="/addIncome">add income</a>
+       			<a href="/selectDate">filter by date</a>
+       			<a href="/budgets">all dates</a>
+       			<a href="/selectDatePlusMonth">month</a>
+       			<a href="/search">search</a>
        
-                        
+                <h2>List of incomes</h2>
 
+      			<table>
+            		<tr>
+                		<th>Id</th>
+                		<th>Detail</th>
+                		<th>Value</th>
+                		<th>Date</th>
+                 		<th>Periodic</th>
+                		<th>Delete</th>
+            		</tr>
+					<tr th:each="income, stat : ${#lists.sort(incomes,byIncomeDate)}">
+                    	<td th:text = "${income.id}"></td>
+                    	<td th:text = "${income.detail}"></td>
+                    	<td th:text = "${income.amount}"></td>
+                    	<td th:text = "${income.inserted}"></td>
+                    	<td th:text = "${income.periodic}"></td>
+                    	<td><a th:href="@{/deleteIncome/{id}(id=${income.id})}">Delete</a></td>
+                	</tr>
+                </table>
 
-        <h2>List of incomes</h2>
+        		<h2>List of products</h2>
 
-      
-<table>
-            <tr>
-                <th>Id</th>
-                <th>Detail</th>
-                <th>Value</th>
-                <th>Date</th>
-                 <th>Periodic</th>
-                <th>Delete</th>
-            </tr>
-
-
-
-                <tr th:each="income, stat : ${#lists.sort(incomes,byIncomeDate)}">
-                    <td th:text = "${income.id}"></td>
-                    <td th:text = "${income.detail}"></td>
-                    <td th:text = "${income.amount}"></td>
-                    <td th:text = "${income.inserted}"></td>
-                    <td th:text = "${income.periodic}"></td>
-                    <td><a th:href="@{/deleteIncome/{id}(id=${income.id})}">Delete</a></td>
-                </tr>
-                
-  
-            
-          
-        </table>
-
-        <h2>List of products</h2>
-
-        <table>
-            <tr>
-                <th>Id</th>
-                <th>Product</th>
-                <th>Category</th>
-                <th>Price</th>
-                <th>Date</th>
-                <th>Periodic</th>
-                <th>Delete</th>
-            </tr>
-
-
-
+        		<table>
+            	<tr>
+                	<th>Id</th>
+                	<th>Product</th>
+                	<th>Category</th>
+                	<th>Price</th>
+                	<th>Date</th>
+                	<th>Periodic</th>
+                	<th>Delete</th>
+            	</tr>
                 <tr th:each="budget, stat : ${#lists.sort(budgets,byDate)}">
                     <td th:text = "${budget.id}"></td>
                     <td th:text = "${budget.product}"></td>
@@ -81,12 +61,8 @@
                     <td th:text = "${budget.periodic}"></td>
                     <td><a th:href="@{/delete/{id}(id=${budget.id})}">Delete</a></td>
                 </tr>
-                
-  
-            
-          
-        </table>
-         <h2>sum </h2>
-          <span th:text="${total}">Total will go here</span>
+        	</table>
+         	<h2>sum </h2>
+          	<span th:text="${total}">Total will go here</span>
     </body>
 </html>
