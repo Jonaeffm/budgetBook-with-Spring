@@ -35,7 +35,7 @@
 			for (let l = 0; l < catarr.length;l++)
 			{
 				var priceGes=0;
-				htmlString += catarr[l] + '\n';
+				htmlString += '<br> <b>'+ catarr[l] + '</b> <br>';
 				htmlString += '<table><tr><th>Id</th><th>Product</th><th ><button th:onclick="sortByCategory()">Category </button></th><th>Price</th><th>Date</th><th>Periodic</th><th>Delete</th></tr>'
 				for (let m=1; m<i;m++)
 				{
@@ -46,7 +46,7 @@
 					}
 					
 				}
-				htmlString +='\n'+ priceGes;
+				htmlString +='</table> <b>'+ priceGes + '</b> <br>';
 			}
 			document.getElementById('prodTable').innerHTML = htmlString;
         }
