@@ -9,8 +9,41 @@
 
         function sortByCategory()
         {
-        	const budgets = /*[[${budgets}]]*/ [];
-        	document.getElementById('prodTable').innerHTML = budgets[0].product; 
+        	const map = new Map(Object.entries(/*[[${budgets}]]*/));
+        	const iterator1 = map.values();
+        	var array = [];
+        	var catarr = [];
+       		var i = 1;
+       		let htmlString = '';
+			while(array[i]=iterator1.next().value)
+       		{
+				let k=0;
+				for(let j = 1;j<(i + 1);j++)
+				{
+					if (array[i].category.localeCompare(catarr[j])===0)
+					{
+						k=1;
+								
+					}
+				}
+				if(k===0)
+				{
+					catarr.push(array[i].category);
+				}
+				i++;
+			}
+			for (let l = 0; l < catarr.length;l++)
+			{
+				htmlString += catarr[l];
+				for (let m=1; m<i;m++)
+				{
+					if(array[m].category.localeCompare(catarr[l])===0)
+					{
+						htmlString += 'Element'
+					}
+				}
+			}
+			document.getElementById('prodTable').innerHTML = htmlString;
         }
         
 		</script>

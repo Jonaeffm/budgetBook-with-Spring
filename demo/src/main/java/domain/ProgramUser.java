@@ -7,6 +7,8 @@ package domain;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -41,6 +43,7 @@ public class ProgramUser {
     @NotEmpty(message = "password is required")
     private String password;
  
+    @JsonIgnore
     @OneToMany(targetEntity= Budget.class, cascade= CascadeType.ALL)
     @JoinColumn(name="user_budget",referencedColumnName = "USER_ID")
     private Collection<Budget> budgets;
