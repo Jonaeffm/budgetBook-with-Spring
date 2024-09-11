@@ -36,7 +36,7 @@
 			{
 				var priceGes=0;
 				htmlString += '<br> <b>'+ catarr[l] + '</b> <br>';
-				htmlString += '<table><tr><th>Id</th><th>Product</th><th ><button th:onclick="sortByCategory()">Category </button></th><th>Price</th><th>Date</th><th>Periodic</th><th>Delete</th></tr>'
+				htmlString += '<table><tr><th>Id</th><th>Product</th><th>Category</th><th>Price</th><th>Date</th><th>Periodic</th></tr>'
 				for (let m=1; m<i;m++)
 				{
 					if(array[m].category.localeCompare(catarr[l])===0)
@@ -46,7 +46,7 @@
 					}
 					
 				}
-				htmlString +='</table> <b>'+ priceGes + '</b> <br>';
+				htmlString +='</table> <b>total '+ priceGes + '</b> <br>';
 			}
 			document.getElementById('prodTable').innerHTML = htmlString;
         }
