@@ -41,7 +41,7 @@ public class ProgramUser {
     @JoinColumn(name="user_budget",referencedColumnName = "USER_ID")
     private Collection<Budget> budgets;
     
-
+    @JsonIgnore
     @OneToMany(targetEntity= Income.class,cascade= CascadeType.ALL)
     @JoinColumn(name="user_income",referencedColumnName = "USER_ID")
     private Collection<Income> incomes;
