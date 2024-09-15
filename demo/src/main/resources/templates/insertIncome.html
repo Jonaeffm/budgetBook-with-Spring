@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
 </head>
 <body>
-  
-   <form method="post" th:object="${incomes}">
+  <form method="post" th:object="${incomes}">
 
-<label for="income.detail">detail</label> 
-<input type="text" class="form-control" id="detail"  th:field="*{detail}" placeholder="Enter detail" />                  
-                        <label for="value">value</label> 
-                        <input type="text" class="form-control" id="amount" th:field="*{amount}"/>
+	<label for="income.detail">detail</label> 
+	<input type="text" class="form-control" id="detail"  th:field="*{detail}" placeholder="Enter detail" />                  
+    
+    <label for="value">value</label> 
+    <input type="text" class="form-control" id="amount" th:field="*{amount}"/>
                         
-                        <label for="date">date</label> 
-                        <input type="text" class="form-control" id="inserted" th:field="*{inserted}"/>
+    <label for="date">date</label> 
+    <input type="text" class="form-control" id="inserted" th:field="*{inserted}"/>
                         
-                        <label for="periodic">periodic</label> 
-                        
-                        <input type="checkbox" id="periodic" th:field="*{periodic}" />  
+    <label for="periodic">periodic</label> 
+    <input type="checkbox" id="periodic" th:field="*{periodic}" />  
 
 <!--    <button type="submit" class="btn btn-primary">Sign in</button> -->
 
-<input type="submit" value="Submit" class="btn btn-primary" />
+	<input type="submit" value="Submit" class="btn btn-primary" />
 </body>
 
 
