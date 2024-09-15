@@ -1,7 +1,5 @@
 package bootstrap;
 
-
-
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,7 +22,6 @@ import repositories.budgetRepository;
 @EnableAutoConfiguration
 @Component
 public class BootStrapData implements CommandLineRunner{
-
 
 	@Autowired
 	private budgetRepository bR2;
@@ -58,7 +55,6 @@ public class BootStrapData implements CommandLineRunner{
 		
 	}
     
-	
 	public ArrayList<Budget> periodic(Budget b){
 		ArrayList<Budget> result = new ArrayList<Budget>();
 		result.add(b);
@@ -84,29 +80,21 @@ public class BootStrapData implements CommandLineRunner{
 		
 	}
     
-	
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 
-		
-		
 		String str_date = "2009-12-31";
 		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		java.util.Date utilDate = formatter.parse(str_date);
 		Date date = new Date(utilDate.getTime());
 
-		
-		
-		
 		Budget cigarettes = new Budget(date,"cigarettes","tabac",(double) 1000);
 	
 		Income money = new Income(date,"gift",(double) 10000);
 		
 		System.out.print("Number of elements: "+bR2.count());
 		System.out.print("Number of incomes"+iR.count());
-		
-		
 		
 		ArrayList<Budget> test ;
 		test = periodic(cigarettes);
@@ -135,10 +123,5 @@ public class BootStrapData implements CommandLineRunner{
 		uR.save(b);
 		iR.save(money);
 		bR2.save(cigarettes);
-
-	
 	}
-
-	
-
 }

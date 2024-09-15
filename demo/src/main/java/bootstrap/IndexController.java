@@ -178,14 +178,12 @@ public class IndexController {
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
-		
 		ProgramUser aut = userRepository.findByUsername(authentication.getName());
 		
 		if(budgetToAdd.getPeriodic())
 				{
 					ArrayList<Budget> toAdd = periodic(budgetToAdd);
 					for(int i=0;i<toAdd.size();i++) {
-						
 						
 						aut.getBudgets().add(toAdd.get(i));	
 						
@@ -399,8 +397,7 @@ public class IndexController {
 	@RequestMapping(value = "/addIncome", method = RequestMethod.POST)
 	public String processIncomeInfo(@ModelAttribute("incomes") Income incomeToAdd) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		
-		
+			
 		ProgramUser aut = userRepository.findByUsername(authentication.getName());
 		if(incomeToAdd.getPeriodic())
 		{
@@ -446,7 +443,6 @@ public class IndexController {
 			
 		return "success";
 	}
-
 
 }
 

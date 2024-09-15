@@ -21,7 +21,6 @@ public class DemoApplication /*implements CommandLineRunner*/{
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-	
 	/*@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
@@ -41,7 +40,5 @@ public class DemoApplication /*implements CommandLineRunner*/{
 		
 		System.out.print("Number of elements: "+bR.count());
 	}*/
-	
-	
 	
 }

@@ -144,10 +144,6 @@ Authentication authentication = SecurityContextHolder.getContext().getAuthentica
 		
 		{
 			
-			
-			
-			
-			
 			if(!temp.get(i).getDetail().contains(s))
 							temp.remove(i);
 		}

@@ -28,8 +28,7 @@ public class BudgetService implements IBudgetService{
 		
 		List<Budget> budList = (List<Budget>) repository.findAll();
 		
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();	
 		
 		ProgramUser aut = userRepository.findByUsername(authentication.getName());
 		for (int i=0;i<budList.size();i++)

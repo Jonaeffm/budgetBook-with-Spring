@@ -1,10 +1,5 @@
 package domain;
 
-
-
-
-
-
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -26,8 +21,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
- 
 @Entity
 public class ProgramUser {
  

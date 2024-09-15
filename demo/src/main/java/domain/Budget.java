@@ -46,7 +46,6 @@ public class Budget {
 		setUser(us);
 	}
 	
-	
 	public Budget(Date d,String p, String c, Double pr)
 	{
 		setDate(d);
@@ -57,8 +56,6 @@ public class Budget {
 		//setUser(null);
 		
 	}
-	
-	
 	
 	public Budget()
 	{
@@ -76,8 +73,6 @@ public class Budget {
 	public Date getDate() {
 		return date;
 	}
-	
-
 
 	public void setDate(Date date) {
 		this.date = date;
@@ -157,8 +152,6 @@ public int compare(Budget b1, Budget b2) {
 	public Boolean getPeriodic() {
 		return periodic;
 	}
-
-
 
 	public void setPeriodic(Boolean periodic) {
 		this.periodic = periodic;
