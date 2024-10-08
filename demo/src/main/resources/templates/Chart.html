@@ -59,7 +59,8 @@ window.addEventListener("load", function loadChart() {
 		for(let g=0;g<(datearr.length);g++)
 			{
 			var Obj = new Object();
-			Obj.year = datearr[g];
+			var mon=datearr[g].getMonth()+1
+			Obj.year = mon.toString()+'/'+datearr[g].getFullYear().toString();
 			Obj.count = totalarr[g];
 			data.push(Obj);
 			
@@ -76,7 +77,7 @@ window.addEventListener("load", function loadChart() {
 				        labels: data.map(row => row.year),
 				        datasets: [
 				          {
-				            label: 'Acquisitions by year',
+				            label: 'Expenses per month',
 				            data: data.map(row => row.count)
 				          }
 				        ]
@@ -91,6 +92,8 @@ window.addEventListener("load", function loadChart() {
 		</script>
 </head>
 <body>
+
+	<a href="/">back to table view</a>
  <!-- <div style="width: 500px;"><canvas id="dimensions"></canvas></div><br/> -->
     <div style="width: 800px;"><canvas id="acquisitions"></canvas></div>
 
