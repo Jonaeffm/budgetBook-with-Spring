@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ <script layout:fragment="script" th:inline="javascript">
+
+ 
+window.addEventListener("load", function loadChart() {
+	  var data= [];
+
+		const map = new Map(Object.entries(/*[[${budgets}]]*/));
+    	const iterator1 = map.values();
+    	var array = [];
+    	var datearr = [];
+    	var totalarr = [];
+   		var i = 1;
+		while(array[i]=iterator1.next().value)
+   		{
+			let k=0;
+			for(let j = 0;j<(i);j++)
+			{
+				var d = new Date(array[i].date);
+				if(datearr[j])
+				{
+					if (d.getMonth()==datearr[j].getMonth() && d.getFullYear()==datearr[j].getFullYear())
+					{
+						k=1;
+								
+					}
+					
+				}
+				
+			}
+			if(k==0)
+			{
+				datearr.push(d);
+			}
+			i++;
+		}
+		for (let l = 0; l < (datearr.length);l++)
+		{
+			var priceGes=0;
+			totalarr[l]=0;
+			for (let m=1; m<i;m++)
+			{
+				var d = new Date(array[m].date);
+				if(d.getMonth()==datearr[l].getMonth() && d.getFullYear()==datearr[l].getFullYear())
+				{
+					totalarr[l] += array[m].price;
+					console.log(totalarr[l]);
+					priceGes += array[m].price;
+				}
+				
+			}
+		}
+		
+		for(let g=0;g<(datearr.length);g++)
+			{
+			var Obj = new Object();
+			Obj.year = datearr[g];
+			Obj.count = totalarr[g];
+			data.push(Obj);
+			
+			
+			}
+ 
+    
+	  
+		 new Chart(
+				    document.getElementById('acquisitions'),
+				    {
+				      type: 'bar',
+				      data: {
+				        labels: data.map(row => row.year),
+				        datasets: [
+				          {
+				            label: 'Acquisitions by year',
+				            data: data.map(row => row.count)
+				          }
+				        ]
+				      }
+				    }
+				  );
+	}  );
+ 
+        
+        
+        
+		</script>
+</head>
+<body>
+ <!-- <div style="width: 500px;"><canvas id="dimensions"></canvas></div><br/> -->
+    <div style="width: 800px;"><canvas id="acquisitions"></canvas></div>
+
+
+    <!-- <script type="module" src="dimensions.js"></script> -->
+    
+</body>
+</html>

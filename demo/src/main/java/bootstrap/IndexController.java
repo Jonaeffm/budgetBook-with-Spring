@@ -138,7 +138,9 @@ public class IndexController {
 	 
 	        return "redirect:/";
 	        }
-	@GetMapping({"/budgets","/"})
+	
+	 
+	 @GetMapping({"/budgets","/"})
 	public String getBudgets(Model model) {
 		model.addAttribute("incomes", IncomeService.findAll());
 		model.addAttribute("budgets", BudgetService.findAll());
@@ -209,6 +211,29 @@ public class IndexController {
 		// model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
 		return "selectDate";
 	}
+	
+	 @GetMapping({"/chart"})
+		public String chart(Model model) {
+			model.addAttribute("incomes", IncomeService.findAll());
+			model.addAttribute("budgets", BudgetService.findAll());
+			model.addAttribute("byDate", Comparator.comparing(Budget::getDate));
+			model.addAttribute("byIncomeDate", Comparator.comparing(Income::getInserted));
+			model.addAttribute("byCategory", Comparator.comparing(Budget::getCategory));
+
+			double total = 0;
+			List<Budget> b = BudgetService.findAll();
+			List<Income> ic = IncomeService.findAll();
+			for (int i = 0; i < b.size(); i++) {
+
+				total = total - b.get(i).getPrice();
+			}
+			for (int i = 0; i < ic.size(); i++) {
+				total = total + ic.get(i).getAmount();
+			}
+			// get the total of your list
+			model.addAttribute("total", total);
+			return "Chart";
+		}
 
 	@RequestMapping(value = "/selectDate", method = RequestMethod.POST)
 	public String selectDate(Model model, @ModelAttribute("budgets") Budget budgetToAdd) {
